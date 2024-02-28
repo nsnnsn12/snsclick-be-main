@@ -48,7 +48,7 @@ ex) add getMember method to Member class
 > 이슈 번호를 넣을 때 사용
 
 ## 예시
-    Feat: add getMember method to Member class
+    Feat: Add getMember method to Member class
     
     사용자 조회 기능을 위해 getMember 메서드를 Member class에 추가
     
