@@ -26,7 +26,7 @@ public class ItemController {
         try {
             return new ResponseEntity<>(objectMapper.convert(itemUseCase.getItem(id), ResponseItem.class), HttpStatus.OK);
         } catch (ItemNotFoundException e) {
-            throw  new NoSearchException();
+            throw new NoSearchException();
         }
     }
 }
