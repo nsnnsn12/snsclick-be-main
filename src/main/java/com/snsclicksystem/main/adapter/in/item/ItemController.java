@@ -1,7 +1,9 @@
 package com.snsclicksystem.main.adapter.in.item;
 
 
+import com.snsclicksystem.main.adapter.in.common.NoSearchException;
 import com.snsclicksystem.main.adapter.in.item.dto.ResponseItem;
+import com.snsclicksystem.main.application.port.in.item.ItemNotFoundException;
 import com.snsclicksystem.main.application.port.in.item.ItemUseCase;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,10 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseItem> get(@PathVariable("id") Long id){
-        return new ResponseEntity<>(objectMapper.convert(itemUseCase.getItem(id), ResponseItem.class), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(objectMapper.convert(itemUseCase.getItem(id), ResponseItem.class), HttpStatus.OK);
+        } catch (ItemNotFoundException e) {
+            throw  new NoSearchException();
+        }
     }
 }

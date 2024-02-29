@@ -1,5 +1,6 @@
 package com.snsclicksystem.main.application.service.item;
 
+import com.snsclicksystem.main.application.port.in.item.ItemNotFoundException;
 import com.snsclicksystem.main.application.port.in.item.ItemUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.ItemRepository;
 import com.snsclicksystem.main.domain.item.SnsItem;
@@ -14,7 +15,7 @@ public class ItemService implements ItemUseCase {
     private final ItemRepository itemRepository;
 
     @Override
-    public SnsItem getItem(Long id) {
-        return itemRepository.findById(id);
+    public SnsItem getItem(Long id) throws ItemNotFoundException {
+        return itemRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 }
