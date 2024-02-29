@@ -2,8 +2,10 @@ package com.snsclicksystem.main.adapter.out.persistence.item;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity(name="item")
+@Getter
 public class ItemEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
