@@ -2,7 +2,7 @@ package com.snsclicksystem.main.adapter.in.item;
 
 
 import com.snsclicksystem.main.adapter.in.item.dto.ResponseItem;
-import com.snsclicksystem.main.application.port.in.usecase.ItemUseCase;
+import com.snsclicksystem.main.application.port.in.item.ItemUseCase;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

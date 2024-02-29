@@ -1,6 +1,6 @@
 package com.snsclicksystem.main.application.service.item;
 
-import com.snsclicksystem.main.application.port.in.usecase.ItemUseCase;
+import com.snsclicksystem.main.application.port.in.item.ItemUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.ItemRepository;
 import com.snsclicksystem.main.domain.item.SnsItem;
 import lombok.RequiredArgsConstructor;

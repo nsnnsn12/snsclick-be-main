@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.application.port.in.usecase;
+package com.snsclicksystem.main.application.port.in.item;
 
 import com.snsclicksystem.main.domain.item.SnsItem;
 
