@@ -5,14 +5,16 @@ import com.snsclicksystem.main.domain.item.SnsItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class ItemRepositoryImpl implements ItemRepository {
     private final ItemJPARepository jpaRepository;
     @Override
-    public SnsItem findById(Long id) {
-        ItemEntity itemEntity = jpaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 id 입니다."));
-        return getSnsItemFromModel(itemEntity);
+    public Optional<SnsItem> findById(Long id) {
+        Optional<ItemEntity> item = jpaRepository.findById(id);
+        return item.map(this::getSnsItemFromModel);
     }
 
     private SnsItem getSnsItemFromModel(ItemEntity entity){
