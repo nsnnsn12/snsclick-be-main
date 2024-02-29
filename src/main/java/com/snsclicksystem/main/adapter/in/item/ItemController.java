@@ -3,7 +3,6 @@ package com.snsclicksystem.main.adapter.in.item;
 
 import com.snsclicksystem.main.adapter.in.item.dto.ResponseItem;
 import com.snsclicksystem.main.application.port.in.usecase.ItemUseCase;
-import com.snsclicksystem.main.domain.item.SnsItem;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,6 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseItem> get(@PathVariable("id") Long id){
-        SnsItem snsItem = itemUseCase.getItem(id);
-        return new ResponseEntity<>(objectMapper.convert(snsItem, ResponseItem.class), HttpStatus.OK);
+        return new ResponseEntity<>(objectMapper.convert(itemUseCase.getItem(id), ResponseItem.class), HttpStatus.OK);
     }
 }
