@@ -1,6 +1,6 @@
 package com.snsclicksystem.main.adapter.out.persistence.item;
 
-import com.snsclicksystem.main.application.port.out.persistence.ItemRepository;
+import com.snsclicksystem.main.application.port.out.persistence.item.ItemRepository;
 import com.snsclicksystem.main.domain.item.SnsItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
