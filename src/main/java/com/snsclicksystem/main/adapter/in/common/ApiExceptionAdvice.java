@@ -14,4 +14,11 @@ public class ApiExceptionAdvice {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiExceptionEntity.builder().errorCode("100").errorMessage("존재하지 않는 정보입니다.").build());
     }
+    
+    @ExceptionHandler({NoCreateException.class})
+    public ResponseEntity<ApiExceptionEntity> createExceptionHandler(HttpServletRequest httpServletRequest, final NoCreateException e){
+        return ResponseEntity
+                .status(HttpStatus.EXPECTATION_FAILED)
+                .body(ApiExceptionEntity.builder().errorCode("409").errorMessage(e.getMessage()).build());
+    }
 }
