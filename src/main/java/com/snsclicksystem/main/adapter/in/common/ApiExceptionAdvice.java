@@ -12,7 +12,7 @@ public class ApiExceptionAdvice {
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest httpServletRequest, final NoSearchException e){
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(ApiExceptionEntity.builder().errorCode("100").errorMessage("존재하지 않는 정보입니다.").build());
+                .body(ApiExceptionEntity.builder().errorCode("100").errorMessage(e.getMessage()).build());
     }
     
     @ExceptionHandler({NoCreateException.class})
