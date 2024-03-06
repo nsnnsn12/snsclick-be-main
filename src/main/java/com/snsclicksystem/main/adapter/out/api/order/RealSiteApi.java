@@ -1,5 +1,7 @@
 package com.snsclicksystem.main.adapter.out.api.order;
 
+import com.snsclicksystem.main.application.port.out.api.order.RequestOrderApi;
+import com.snsclicksystem.main.application.port.out.api.order.ResponseOrderApi;
 import org.springframework.context.annotation.Configuration;
 
 import com.snsclicksystem.main.application.port.out.api.order.OrderApi;
@@ -13,5 +15,11 @@ public class RealSiteApi implements OrderApi{
 		return 0;
 	}
 
-	
+	@Override
+	public ResponseOrderApi order(RequestOrderApi requestOrderApi) {
+		//TODO
+		return null;
+	}
+
+
 }
