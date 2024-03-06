@@ -6,5 +6,6 @@ public interface OrderApi {
 	 * get api charge amount
 	 */
 	int getChargeAmount();
-	
+	ResponseOrderApi order(RequestOrderApi requestOrderApi);
 }
+
