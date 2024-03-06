@@ -5,7 +5,6 @@ public interface OrderApi {
 	/*
 	 * get api charge amount
 	 */
-	public int getChargeAmount();
-
+	int getChargeAmount();
 	
 }
