@@ -1,5 +1,5 @@
 package com.snsclicksystem.main.domain.order;
 
-public class SnsOrder {
+public class Order {
 
 }

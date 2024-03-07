@@ -10,7 +10,7 @@ import com.snsclicksystem.main.application.port.in.order.exception.UserAmountNot
 import com.snsclicksystem.main.application.port.out.api.order.OrderApi;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
-import com.snsclicksystem.main.domain.order.SnsOrder;
+import com.snsclicksystem.main.domain.order.Order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class OrderService implements OrderUseCase{
 	private final OrderApi orderApi;
 
 	@Override
-	public SnsOrder createOrder(RequestOrder order) throws CreateOrderFailException {
+	public Order createOrder(RequestOrder order) throws CreateOrderFailException {
 		int userAmount = memberRepository.findTotAmountById(order.getMemberId());
 		int apiAmount = orderApi.getChargeAmount();
 		int orderPrice = order.getOrderPrice();
