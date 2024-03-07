@@ -10,16 +10,23 @@ import com.snsclicksystem.main.application.port.out.api.order.OrderApi;
 public class RealSiteApi implements OrderApi{
 
 	@Override
-	public int getChargeAmount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public ResponseOrderApi order(RequestOrderApi requestOrderApi) {
-		//TODO
+		if(canOrder()){
+			//TODO need to implements
+		}
 		return null;
 	}
+
+	private boolean canOrder(){
+		isMoneyEnough();
+		//TODO need to add more validation
+		return true;
+	}
+
+	private void isMoneyEnough(){
+		//TODO implement => if(apiAmount < orderPrice) throw new ApiAmountNotEnoughException();
+	}
+
 
 
 }
