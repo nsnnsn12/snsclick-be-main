@@ -1,14 +1,13 @@
 package com.snsclicksystem.main.application.service.order;
 
+import com.snsclicksystem.main.application.port.out.api.order.RequestOrderApi;
+import com.snsclicksystem.main.domain.consumer.Consumer;
+import com.snsclicksystem.main.domain.item.SnsItem;
 import org.springframework.stereotype.Service;
 
-import com.snsclicksystem.main.adapter.in.order.dto.RequestOrder;
 import com.snsclicksystem.main.application.port.in.order.OrderUseCase;
-import com.snsclicksystem.main.application.port.in.order.exception.ApiAmountNotEnoughException;
 import com.snsclicksystem.main.application.port.in.order.exception.CreateOrderFailException;
-import com.snsclicksystem.main.application.port.in.order.exception.UserAmountNotEnoughException;
 import com.snsclicksystem.main.application.port.out.api.order.OrderApi;
-import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
 import com.snsclicksystem.main.domain.order.Order;
 
@@ -20,24 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OrderService implements OrderUseCase{
 	
-	private final MemberRepository memberRepository;
 	private final OrderRepository orderRepository;
 	private final OrderApi orderApi;
 
 	@Override
-	public Order createOrder(RequestOrder order) throws CreateOrderFailException {
-		int userAmount = memberRepository.findTotAmountById(order.getMemberId());
-		int apiAmount = orderApi.getChargeAmount();
-		int orderPrice = order.getOrderPrice();
-		
-		if(userAmount < orderPrice) {
-			throw new UserAmountNotEnoughException();
-		}
-		
-		if(apiAmount < orderPrice) {
-			throw new ApiAmountNotEnoughException();
-		}
-		
+	public Order createOrder(SnsItem item) throws CreateOrderFailException {
+		//TODO need to implement for getting consumer
+		Consumer consumer = new Consumer();
+		Order order = consumer.order(item);
+		orderApi.order(new RequestOrderApi(order));
 		return orderRepository.save(order).orElseThrow(CreateOrderFailException::new);
 	}
 
