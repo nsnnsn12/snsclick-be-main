@@ -28,7 +28,7 @@ public class OrderController {
 	@PostMapping("/")
 	public ResponseEntity<ResponseOrder> orders(@RequestBody @Validated RequestOrder order) {
 		try {
-			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(order), ResponseOrder.class),
+			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(order.getOrderItem()), ResponseOrder.class),
 					HttpStatus.OK);
 		} catch (CreateOrderFailException e) {
 			throw new NoCreateException(e.getMessage());
