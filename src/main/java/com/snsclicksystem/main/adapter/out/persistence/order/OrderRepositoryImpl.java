@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.snsclicksystem.main.adapter.in.order.dto.RequestOrder;
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
 import com.snsclicksystem.main.domain.order.Order;
 
@@ -15,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderRepositoryImpl implements OrderRepository{
 	
 	@Override
-	public Optional<Order> save(RequestOrder order) {
+	public Optional<Order> save(Order order) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
