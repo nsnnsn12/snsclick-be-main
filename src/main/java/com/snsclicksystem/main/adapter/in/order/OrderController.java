@@ -1,5 +1,6 @@
 package com.snsclicksystem.main.adapter.in.order;
 
+import com.snsclicksystem.main.domain.consumer.exception.NotEnoughConsumerAmountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +31,7 @@ public class OrderController {
 		try {
 			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(order.getOrderItem()), ResponseOrder.class),
 					HttpStatus.OK);
-		} catch (CreateOrderFailException e) {
+		} catch (CreateOrderFailException | NotEnoughConsumerAmountException e) {
 			throw new NoCreateException(e.getMessage());
 		}
 	}

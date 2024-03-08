@@ -1,8 +1,7 @@
 package com.snsclicksystem.main.domain.consumer.exception;
 
-import com.snsclicksystem.main.application.port.in.order.exception.CreateOrderFailException;
 
-public class NotEnoughConsumerAmountException extends CreateOrderFailException {
+public class NotEnoughConsumerAmountException extends Exception {
     private static final String message = "사용자 금액 부족";
 
     public NotEnoughConsumerAmountException() {
