@@ -1,6 +1,6 @@
 package com.snsclicksystem.main.domain.consumer;
 
-import com.snsclicksystem.main.domain.consumer.exception.UserAmountNotEnoughException;
+import com.snsclicksystem.main.domain.consumer.exception.NotEnoughConsumerAmountException;
 import com.snsclicksystem.main.domain.item.SnsItem;
 import com.snsclicksystem.main.domain.order.Order;
 import lombok.Getter;
@@ -11,9 +11,9 @@ public class Consumer {
     private String consumerName;
     private Integer amount;
 
-    public Order order(SnsItem item) throws UserAmountNotEnoughException {
+    public Order order(SnsItem item) throws NotEnoughConsumerAmountException {
         if(amount < item.getItemPrice()) {
-            throw new UserAmountNotEnoughException();
+            throw new NotEnoughConsumerAmountException();
         }
         return Order.builder().item(item).consumerId(consumerId).build();
     }
