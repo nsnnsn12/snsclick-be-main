@@ -5,6 +5,5 @@ import com.snsclicksystem.main.domain.item.SnsItem;
 import com.snsclicksystem.main.domain.order.Order;
 
 public interface OrderUseCase {
-
 	Order createOrder(SnsItem item) throws CreateOrderFailException;
 }

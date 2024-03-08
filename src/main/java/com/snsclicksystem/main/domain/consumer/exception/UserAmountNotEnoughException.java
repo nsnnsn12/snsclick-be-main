@@ -1,4 +1,6 @@
-package com.snsclicksystem.main.application.port.in.order.exception;
+package com.snsclicksystem.main.domain.consumer.exception;
+
+import com.snsclicksystem.main.application.port.in.order.exception.CreateOrderFailException;
 
 public class UserAmountNotEnoughException extends CreateOrderFailException {
     private static final String message = "사용자 금액 부족";
