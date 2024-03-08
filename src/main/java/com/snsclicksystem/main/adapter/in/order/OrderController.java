@@ -1,5 +1,6 @@
 package com.snsclicksystem.main.adapter.in.order;
 
+import com.snsclicksystem.main.application.port.out.api.order.exception.NotEnoughApiAmountException;
 import com.snsclicksystem.main.domain.consumer.exception.NotEnoughConsumerAmountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import com.snsclicksystem.main.adapter.in.common.NoCreateException;
 import com.snsclicksystem.main.adapter.in.order.dto.RequestOrder;
 import com.snsclicksystem.main.adapter.in.order.dto.ResponseOrder;
 import com.snsclicksystem.main.application.port.in.order.OrderUseCase;
-import com.snsclicksystem.main.application.port.in.order.exception.CreateOrderFailException;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class OrderController {
 		try {
 			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(order.getOrderItem()), ResponseOrder.class),
 					HttpStatus.OK);
-		} catch (CreateOrderFailException | NotEnoughConsumerAmountException e) {
+		} catch (NotEnoughApiAmountException | NotEnoughConsumerAmountException e) {
 			throw new NoCreateException(e.getMessage());
 		}
 	}

@@ -1,8 +1,7 @@
 package com.snsclicksystem.main.application.port.out.api.order.exception;
 
-import com.snsclicksystem.main.application.port.in.order.exception.CreateOrderFailException;
 
-public class NotEnoughApiAmountException extends CreateOrderFailException {
+public class NotEnoughApiAmountException extends Exception{
     private static final String message = "api 금액 부족";
 
 

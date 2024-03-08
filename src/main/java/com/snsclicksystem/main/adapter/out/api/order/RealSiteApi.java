@@ -24,7 +24,7 @@ public class RealSiteApi implements OrderApi{
 	}
 
 	private void isMoneyEnough(){
-		//TODO implement => if(apiAmount < orderPrice) throw new ApiAmountNotEnoughException();
+		//TODO implement => if(apiAmount < orderPrice) throw new NotEnoughApiAmountException();
 	}
 
 
