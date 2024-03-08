@@ -1,28 +1,28 @@
 package com.snsclicksystem.main.application.port.in.order.exception;
 
-public class ApiAmountNotEnoughException extends CreateOrderFailException {
+public class NotEnoughApiAmountException extends CreateOrderFailException {
     private static final String message = "api 금액 부족";
 
 
-    public ApiAmountNotEnoughException() {
+    public NotEnoughApiAmountException() {
         super(message);
     }
 
-    public ApiAmountNotEnoughException(String message) {
+    public NotEnoughApiAmountException(String message) {
         super(message);
     }
 
 
-    public ApiAmountNotEnoughException(String message, Throwable cause) {
+    public NotEnoughApiAmountException(String message, Throwable cause) {
         super(message, cause);
     }
 
 
-    public ApiAmountNotEnoughException(Throwable cause) {
+    public NotEnoughApiAmountException(Throwable cause) {
         super(cause);
     }
 
-    protected ApiAmountNotEnoughException(String message, Throwable cause,
+    protected NotEnoughApiAmountException(String message, Throwable cause,
                                           boolean enableSuppression,
                                           boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
