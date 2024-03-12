@@ -1,12 +1,13 @@
 package com.snsclicksystem.main.application.port.out.persistence.charge;
 
-import java.util.Optional;
 
+import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
 import com.snsclicksystem.main.domain.charge.Charge;
 
 public interface ChargeRepository {
 
-	Charge save(RequestChargeCriteria charge);
+	Charge save(ChargeEntity chargeEntity);
+
 
 
 }

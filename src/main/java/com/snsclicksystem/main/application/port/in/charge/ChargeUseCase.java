@@ -5,6 +5,6 @@ import com.snsclicksystem.main.domain.charge.Charge;
 
 public interface ChargeUseCase {
 	
-	Charge requestCharge(RequestCharge charge);
+	Charge requestCharge(Charge charge);
 
 }

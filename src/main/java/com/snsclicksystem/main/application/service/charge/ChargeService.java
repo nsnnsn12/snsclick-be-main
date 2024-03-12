@@ -2,18 +2,17 @@ package com.snsclicksystem.main.application.service.charge;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.snsclicksystem.main.adapter.in.charge.dto.RequestCharge;
+import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.application.port.in.charge.ChargeUseCase;
-import com.snsclicksystem.main.application.port.out.persistence.charge.RequestChargeCriteria;
 import com.snsclicksystem.main.application.port.out.api.charge.ChargeApi;
 import com.snsclicksystem.main.application.port.out.persistence.charge.ChargeRepository;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.charge.Charge;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,25 +30,22 @@ public class ChargeService implements ChargeUseCase {
 	 * 결제 요청 service
 	 */
 	@Override
-	public Charge requestCharge(RequestCharge requestCharge) {
+	public Charge requestCharge(Charge charge) {
 		//member create (TODO : DELETE)
 		memberRepository.save(new MemberEntity("ddd@gmail.com"));
 		
 		// find member
-		MemberEntity member = memberRepository.findEntityById(requestCharge.getMemberId()).get();
+		MemberEntity member = memberRepository.findEntityById(charge.getMemberId()).get();
 		
-		// set save parameter
-		RequestChargeCriteria charge = new RequestChargeCriteria();
-		charge.setChargeType(requestCharge.getChargeType().toString());
-		charge.setRealAmountPaid(requestCharge.getRealAmountPaid());
-		charge.setMember(member);
+		// create chargeEntity 
+		ChargeEntity chargeEntity = ChargeEntity.createChargeEntity(charge,member);
 		
 		// save request charge
-		Charge savedCharge = chargeRepository.save(charge);
+		Charge savedCharge = chargeRepository.save(chargeEntity);
 		
 		// set url from return request charge
-		savedCharge.setSuccessUrl(StringUtils.hasText(requestCharge.getMySuccessUrl()) ? requestCharge.getMySuccessUrl() : chargeApi.getSuccessUrl());
-		savedCharge.setFailUrl(StringUtils.hasText(requestCharge.getMyFailUrl()) ? requestCharge.getMyFailUrl() : chargeApi.getFailUrl());
+		savedCharge.setSuccessUrl(StringUtils.hasText(charge.getSuccessUrl()) ? charge.getSuccessUrl() : chargeApi.getSuccessUrl());
+		savedCharge.setFailUrl(StringUtils.hasText(charge.getFailUrl()) ? charge.getFailUrl() : chargeApi.getFailUrl());
 		
 		//set member email
 		savedCharge.setMemberEmail(member.getEmail());

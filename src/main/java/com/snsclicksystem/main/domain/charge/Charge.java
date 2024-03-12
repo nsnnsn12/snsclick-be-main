@@ -55,5 +55,13 @@ public class Charge {
 	public void setMemberEmail(String email) {
 		this.memberEmail = email;
 	}
+	
+	public static Charge createRequestCharge(Long memberId, String chargeType, Long realAmountPaid, String successUrl, String failUrl) {
+		return Charge.builder().memberId(memberId)
+		.chargeType(chargeType)
+		.realAmountPaid(realAmountPaid)
+		.successUrl(successUrl)
+		.failUrl(failUrl).build();
+	}
 
 }

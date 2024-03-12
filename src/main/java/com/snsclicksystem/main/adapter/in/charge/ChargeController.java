@@ -30,6 +30,7 @@ public class ChargeController {
 	private final ChargeUseCase chargeUseCase;
 	private final ObjectMapper objectMapper;
 
+	// TODO : DELETE Test Code
 	@RequestMapping("/")
 	public String test(HttpServletResponse response) {
 		return "checkout";
@@ -41,8 +42,11 @@ public class ChargeController {
 	@PostMapping("/requestCharge")
 	@ResponseBody
 	public ResponseEntity<ResponseCharge> requestTossPayment(@RequestBody @Valid RequestCharge charge) {
-		Charge requestCharge = chargeUseCase.requestCharge(charge);
-		
+		Charge domainCharge = Charge.createRequestCharge(charge.getMemberId(), charge.getChargeType().toString(),
+				charge.getRealAmountPaid(), charge.getMySuccessUrl(), charge.getMyFailUrl());
+
+		Charge requestCharge = chargeUseCase.requestCharge(domainCharge);
+
 		ResponseCharge responseCharge = new ResponseCharge();
 		responseCharge.setPayType(requestCharge.getChargeType());
 		responseCharge.setAmount(requestCharge.getRealAmountPaid());
@@ -55,7 +59,7 @@ public class ChargeController {
 		responseCharge.setCancelYN(requestCharge.getIsCancel());
 		responseCharge.setCancelReason(requestCharge.getCancelReason());
 		responseCharge.setCreatedAt(requestCharge.getCreatedAt());
-		
+
 		return new ResponseEntity<>(responseCharge, HttpStatus.OK);
 	}
 

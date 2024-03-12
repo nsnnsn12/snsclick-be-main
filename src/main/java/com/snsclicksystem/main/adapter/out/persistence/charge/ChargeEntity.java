@@ -2,7 +2,7 @@ package com.snsclicksystem.main.adapter.out.persistence.charge;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
-import com.snsclicksystem.main.application.port.out.persistence.charge.RequestChargeCriteria;
+import com.snsclicksystem.main.domain.charge.Charge;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,8 +45,10 @@ public class ChargeEntity extends BaseTimeEntity{
 	
 	private String chargeApiId;
 
-	public static ChargeEntity toEntity(RequestChargeCriteria charge) {
-		return ChargeEntity.builder().member(charge.getMember())
+	
+	//TODO : Apply Model Mapper
+	public static ChargeEntity createChargeEntity(Charge charge, MemberEntity member) {
+		return ChargeEntity.builder().member(member)
 				.realAmountPaid(charge.getRealAmountPaid())
 				.chargeType(charge.getChargeType())
 				.isPaySuccess(false)
