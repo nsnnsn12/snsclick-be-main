@@ -5,6 +5,6 @@ import com.snsclicksystem.main.domain.charge.Charge;
 
 public interface ChargeUseCase {
 	
-	Charge requestCharge(Charge charge);
+	Charge requestCharge(Charge charge) throws ChargeRequestFailException;
 
 }

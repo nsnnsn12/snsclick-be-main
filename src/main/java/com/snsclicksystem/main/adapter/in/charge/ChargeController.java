@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.snsclicksystem.main.adapter.in.charge.dto.RequestCharge;
 import com.snsclicksystem.main.adapter.in.charge.dto.ResponseCharge;
+import com.snsclicksystem.main.adapter.in.common.NoCreateException;
 import com.snsclicksystem.main.adapter.in.common.NoSearchException;
+import com.snsclicksystem.main.application.port.in.charge.ChargeRequestFailException;
 import com.snsclicksystem.main.application.port.in.charge.ChargeUseCase;
 import com.snsclicksystem.main.domain.charge.Charge;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
@@ -42,25 +44,29 @@ public class ChargeController {
 	@PostMapping("/requestCharge")
 	@ResponseBody
 	public ResponseEntity<ResponseCharge> requestTossPayment(@RequestBody @Valid RequestCharge charge) {
-		Charge domainCharge = Charge.createRequestCharge(charge.getMemberId(), charge.getChargeType().toString(),
-				charge.getRealAmountPaid(), charge.getMySuccessUrl(), charge.getMyFailUrl());
+		try {
+			Charge domainCharge = Charge.createRequestCharge(charge.getMemberId(), charge.getChargeType().toString(),
+					charge.getRealAmountPaid(), charge.getMySuccessUrl(), charge.getMyFailUrl());
+			
+			Charge requestCharge = chargeUseCase.requestCharge(domainCharge);
+			
+			ResponseCharge responseCharge = new ResponseCharge();
+			responseCharge.setPayType(requestCharge.getChargeType());
+			responseCharge.setAmount(requestCharge.getRealAmountPaid());
+			responseCharge.setOrderId(requestCharge.getId());
+			responseCharge.setOrderName("포인트 충전");
+			responseCharge.setCustomerName(requestCharge.getMemberEmail());
+			responseCharge.setSuccessUrl(requestCharge.getSuccessUrl());
+			responseCharge.setFailUrl(requestCharge.getFailUrl());
+			responseCharge.setFailReason(requestCharge.getFailReason());
+			responseCharge.setCancelYN(requestCharge.getIsCancel());
+			responseCharge.setCancelReason(requestCharge.getCancelReason());
+			responseCharge.setCreatedAt(requestCharge.getCreatedAt());
 
-		Charge requestCharge = chargeUseCase.requestCharge(domainCharge);
-
-		ResponseCharge responseCharge = new ResponseCharge();
-		responseCharge.setPayType(requestCharge.getChargeType());
-		responseCharge.setAmount(requestCharge.getRealAmountPaid());
-		responseCharge.setOrderId(requestCharge.getId());
-		responseCharge.setOrderName("포인트 충전");
-		responseCharge.setCustomerName(requestCharge.getMemberEmail());
-		responseCharge.setSuccessUrl(requestCharge.getSuccessUrl());
-		responseCharge.setFailUrl(requestCharge.getFailUrl());
-		responseCharge.setFailReason(requestCharge.getFailReason());
-		responseCharge.setCancelYN(requestCharge.getIsCancel());
-		responseCharge.setCancelReason(requestCharge.getCancelReason());
-		responseCharge.setCreatedAt(requestCharge.getCreatedAt());
-
-		return new ResponseEntity<>(responseCharge, HttpStatus.OK);
+			return new ResponseEntity<>(responseCharge, HttpStatus.OK);
+		} catch (ChargeRequestFailException e) {
+            throw new NoCreateException(e.getMessage());
+		}
 	}
 
 	/*

@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 
 import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
+import com.snsclicksystem.main.application.port.in.charge.ChargeRequestFailException;
 import com.snsclicksystem.main.application.port.in.charge.ChargeUseCase;
 import com.snsclicksystem.main.application.port.out.api.charge.ChargeApi;
 import com.snsclicksystem.main.application.port.out.persistence.charge.ChargeRepository;
@@ -30,7 +31,7 @@ public class ChargeService implements ChargeUseCase {
 	 * 결제 요청 service
 	 */
 	@Override
-	public Charge requestCharge(Charge charge) {
+	public Charge requestCharge(Charge charge) throws ChargeRequestFailException{
 		//member create (TODO : DELETE)
 		memberRepository.save(new MemberEntity("ddd@gmail.com"));
 		
