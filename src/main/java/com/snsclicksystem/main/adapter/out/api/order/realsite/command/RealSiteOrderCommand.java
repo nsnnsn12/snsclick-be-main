@@ -2,7 +2,6 @@ package com.snsclicksystem.main.adapter.out.api.order.realsite.command;
 
 import com.snsclicksystem.main.adapter.out.api.order.dto.OrderedInfo;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
-import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteOrderDto;
 import com.snsclicksystem.main.adapter.out.api.order.OrderApi;
 import com.snsclicksystem.main.domain.consumer.exception.NotEnoughApiAmountException;
 import com.snsclicksystem.main.domain.consumer.Consumer;
@@ -16,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class RealSiteOrderCommand implements OrderCommand {
     protected final OrderApi<RealSiteClient, Integer> orderApi;
-    protected final RealSiteOrderDto realSiteOrderDto;
 
     @Override
     public abstract Order execute(Consumer consumer) throws NotEnoughApiAmountException;

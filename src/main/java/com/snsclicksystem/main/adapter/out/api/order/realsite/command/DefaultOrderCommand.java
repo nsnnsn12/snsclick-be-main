@@ -1,7 +1,6 @@
 package com.snsclicksystem.main.adapter.out.api.order.realsite.command;
 
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
-import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteOrderDto;
 import com.snsclicksystem.main.adapter.out.api.order.OrderApi;
 import com.snsclicksystem.main.adapter.out.api.order.dto.OrderedInfo;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
@@ -15,15 +14,11 @@ import com.snsclicksystem.main.domain.order.Order;
  */
 public class DefaultOrderCommand extends RealSiteOrderCommand {
     private final DefaultOrderDto defaultOrderDto;
-    public DefaultOrderCommand(OrderApi<RealSiteClient, Integer> orderApi, RealSiteOrderDto realSiteOrderDto) {
-        super(orderApi, realSiteOrderDto);
-        this.defaultOrderDto = toRealSiteOrderDto(realSiteOrderDto);
+    public DefaultOrderCommand(OrderApi<RealSiteClient, Integer> orderApi, DefaultOrderDto defaultOrderDto) {
+        super(orderApi);
+        this.defaultOrderDto = defaultOrderDto;
     }
 
-    private DefaultOrderDto toRealSiteOrderDto(RealSiteOrderDto realSiteOrderDto){
-        //TODO need to implement
-        return null;
-    }
     @Override
     public Order execute(Consumer consumer) throws NotEnoughApiAmountException {
         //TODO need to implement
