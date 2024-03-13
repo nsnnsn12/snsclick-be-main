@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.adapter.out.api.order.dto;
+package com.snsclicksystem.main.adapter.out.api.order.realsite.dto;
 
 import lombok.Getter;
 import lombok.Setter;
