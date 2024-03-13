@@ -1,6 +1,7 @@
 package com.snsclicksystem.main.adapter.in.order;
 
-import com.snsclicksystem.main.application.port.out.api.order.exception.NotEnoughApiAmountException;
+import com.snsclicksystem.main.adapter.in.order.factory.OrderCommandFactory;
+import com.snsclicksystem.main.domain.consumer.exception.NotEnoughApiAmountException;
 import com.snsclicksystem.main.domain.consumer.exception.NotEnoughConsumerAmountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +26,15 @@ public class OrderController {
 
 	private final OrderUseCase orderUseCase;
 	private final ObjectMapper objectMapper;
+	private final OrderCommandFactory orderCommandFactory;
 
 	@PostMapping("/")
 	public ResponseEntity<ResponseOrder> orders(@RequestBody @Validated RequestOrder order) {
 		try {
-			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(order.getOrderItem()), ResponseOrder.class),
+			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(orderCommandFactory.createOrderCommand(order)), ResponseOrder.class),
 					HttpStatus.OK);
 		} catch (NotEnoughApiAmountException | NotEnoughConsumerAmountException e) {
 			throw new NoCreateException(e.getMessage());
 		}
 	}
-
-	//TODO 컨트롤러 부분은 우리가 사용자에게 제공할 기능이 무엇인지 그리고 사용자, 즉 프론트로부터 어떤 정보를 받을지 정의한 다음에 작성해야 할 듯
-
 }

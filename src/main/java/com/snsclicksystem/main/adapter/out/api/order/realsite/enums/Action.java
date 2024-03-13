@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.adapter.out.api.order.enums;
+package com.snsclicksystem.main.adapter.out.api.order.realsite.enums;
 
 public enum Action {
     ADD("add"), BALANCE("balance");

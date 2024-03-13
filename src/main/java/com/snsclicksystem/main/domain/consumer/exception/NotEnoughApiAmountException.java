@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.application.port.out.api.order.exception;
+package com.snsclicksystem.main.domain.consumer.exception;
 
 
 public class NotEnoughApiAmountException extends Exception{
