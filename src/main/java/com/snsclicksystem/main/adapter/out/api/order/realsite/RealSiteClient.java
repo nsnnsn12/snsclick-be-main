@@ -1,9 +1,12 @@
-package com.snsclicksystem.main.adapter.out.api.order;
+package com.snsclicksystem.main.adapter.out.api.order.realsite;
 
-import com.snsclicksystem.main.adapter.out.api.order.dto.*;
+import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * real site에 실제 주문을 하는 클라이언트
+ */
 @FeignClient(name = "real-site", url = "${external.real-site.url}")
 public interface RealSiteClient {
     //TODO need to test about these api
@@ -30,8 +33,4 @@ public interface RealSiteClient {
 
     @PostMapping("/api/v2")
     Integer orderSubscription(SubscriptionsOrderDto subscribersOrderDto);
-
-
-
-
 }
