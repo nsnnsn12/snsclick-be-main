@@ -2,7 +2,6 @@ package com.snsclicksystem.main.adapter.out.persistence.charge;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
-import com.snsclicksystem.main.domain.charge.Charge;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +18,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ChargeEntity extends BaseTimeEntity{
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "charge_id")
@@ -44,15 +42,4 @@ public class ChargeEntity extends BaseTimeEntity{
 	private Boolean isPaySuccess;
 	
 	private String chargeApiId;
-
-	
-	//TODO : Apply Model Mapper
-	public static ChargeEntity createChargeEntity(Charge charge, MemberEntity member) {
-		return ChargeEntity.builder().member(member)
-				.realAmountPaid(charge.getRealAmountPaid())
-				.chargeType(charge.getChargeType())
-				.isPaySuccess(false)
-				.isCancel(false)
-				.build();
-	}
 }

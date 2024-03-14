@@ -1,13 +1,8 @@
 package com.snsclicksystem.main.application.port.out.persistence.charge;
 
 
-import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
-import com.snsclicksystem.main.domain.charge.Charge;
+import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
 
 public interface ChargeRepository {
-
-	Charge save(ChargeEntity chargeEntity);
-
-
-
+	ChargedInfo saveByChargedInfo(ChargedInfo chargedInfo);
 }
