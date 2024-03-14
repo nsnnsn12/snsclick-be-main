@@ -1,10 +1,6 @@
 package com.snsclicksystem.main.adapter.in.order.dto;
 
-import java.time.LocalDateTime;
-
-import org.antlr.v4.runtime.misc.NotNull;
-
-import jakarta.validation.constraints.NotEmpty;
+import com.snsclicksystem.main.domain.item.SnsItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +12,7 @@ public class RequestOrder {
 	private Long memberId;
 	private int orderPrice;
 
+	public SnsItem getOrderItem(){
+		return SnsItem.builder().build();
+	}
 }
