@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.application.port.in.charge;
+package com.snsclicksystem.main.domain.charge.exception;
 
 public class ChargeRequestFailException extends Exception {
 
