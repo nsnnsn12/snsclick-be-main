@@ -1,10 +1,11 @@
 package com.snsclicksystem.main.application.port.in.charge;
 
-import com.snsclicksystem.main.adapter.in.charge.dto.RequestCharge;
-import com.snsclicksystem.main.domain.charge.Charge;
+import com.snsclicksystem.main.domain.charge.ChargeFactory;
+import com.snsclicksystem.main.domain.charge.exception.ChargeRequestFailException;
+import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
 
 public interface ChargeUseCase {
-	
-	Charge requestCharge(Charge charge) throws ChargeRequestFailException;
+
+	ChargedInfo requestCharge(ChargeFactory chargeFactory) throws ChargeRequestFailException;
 
 }
