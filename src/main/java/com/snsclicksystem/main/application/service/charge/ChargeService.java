@@ -1,7 +1,6 @@
 package com.snsclicksystem.main.application.service.charge;
 
 
-import com.snsclicksystem.main.domain.charge.ChargeFactory;
 import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
 import com.snsclicksystem.main.domain.member.Member;
 import org.springframework.stereotype.Service;

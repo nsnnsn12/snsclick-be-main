@@ -1,8 +1,9 @@
 package com.snsclicksystem.main.adapter.in.order;
 
-import com.snsclicksystem.main.adapter.in.order.factory.OrderCommandFactory;
-import com.snsclicksystem.main.domain.consumer.exception.NotEnoughApiAmountException;
-import com.snsclicksystem.main.domain.consumer.exception.NotEnoughConsumerAmountException;
+import com.snsclicksystem.main.adapter.in.order.factory.RealSiteOrderFactory;
+import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
+import com.snsclicksystem.main.domain.order.exception.NotEnoughApiAmountException;
+import com.snsclicksystem.main.domain.order.exception.NotEnoughConsumerAmountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,12 +27,13 @@ public class OrderController {
 
 	private final OrderUseCase orderUseCase;
 	private final ObjectMapper objectMapper;
-	private final OrderCommandFactory orderCommandFactory;
+	private final RealSiteClient realSiteClient;
 
 	@PostMapping("/")
 	public ResponseEntity<ResponseOrder> orders(@RequestBody @Validated RequestOrder order) {
 		try {
-			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(orderCommandFactory.createOrderCommand(order)), ResponseOrder.class),
+			//TODO order type에 따라 분기가 되든 뭐가 되든 해야 함
+			return new ResponseEntity<>(objectMapper.convert(orderUseCase.createOrder(new RealSiteOrderFactory(order, realSiteClient)), ResponseOrder.class),
 					HttpStatus.OK);
 		} catch (NotEnoughApiAmountException | NotEnoughConsumerAmountException e) {
 			throw new NoCreateException(e.getMessage());
