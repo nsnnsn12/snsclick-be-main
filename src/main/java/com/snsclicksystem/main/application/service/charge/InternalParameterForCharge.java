@@ -10,6 +10,6 @@ import lombok.Getter;
  */
 @Builder
 @Getter
-public class ChargeParameter {
+public class InternalParameterForCharge {
 	private Member member;
 }

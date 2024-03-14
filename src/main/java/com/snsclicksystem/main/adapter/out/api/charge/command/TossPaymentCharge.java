@@ -2,12 +2,12 @@ package com.snsclicksystem.main.adapter.out.api.charge.command;
 
 import com.snsclicksystem.main.domain.charge.exception.ChargeRequestFailException;
 import com.snsclicksystem.main.domain.charge.Charge;
-import com.snsclicksystem.main.application.service.charge.ChargeParameter;
+import com.snsclicksystem.main.application.service.charge.InternalParameterForCharge;
 import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
 
 public class TossPaymentCharge extends Charge {
 
-    public TossPaymentCharge(ChargeParameter parameter) {
+    public TossPaymentCharge(InternalParameterForCharge parameter) {
         super(parameter);
     }
 

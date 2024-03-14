@@ -38,7 +38,7 @@ public class ChargeService implements ChargeUseCase {
 //		MemberEntity member = memberRepository.findEntityById(charge.getMemberId()).get();
 		Member member = Member.builder().build();
 		//충전 시 필요한 파라미터를 받아 충전 객체를 생성한다.
-		Charge charge = chargeFactory.getCharge(ChargeParameter.builder().member(member).build());
+		Charge charge = chargeFactory.getCharge(InternalParameterForCharge.builder().member(member).build());
 
 		//충전을 한다.
 		ChargedInfo chargedInfo = charge.execute();

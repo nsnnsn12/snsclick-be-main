@@ -5,7 +5,7 @@ import com.snsclicksystem.main.adapter.in.charge.dto.RequestCharge;
 import com.snsclicksystem.main.adapter.out.api.charge.command.TossPaymentCharge;
 import com.snsclicksystem.main.domain.charge.Charge;
 import com.snsclicksystem.main.domain.charge.ChargeFactory;
-import com.snsclicksystem.main.application.service.charge.ChargeParameter;
+import com.snsclicksystem.main.application.service.charge.InternalParameterForCharge;
 
 /**
  * 토스 결제를 위한 객체를 만드는 클래스
@@ -19,7 +19,7 @@ public class TossPaymentChargeFactory extends ChargeFactory {
 	}
 
 	@Override
-	public Charge getCharge(ChargeParameter parameter) {
+	public Charge getCharge(InternalParameterForCharge parameter) {
 		//TODO 외부에서 전달받은 requestCharge와 내부에서 전달받은 ChargeParameter를 합쳐서 TossPaymentCharge 객체를 생성해야 한다.
 		TossPaymentCharge tossPaymentCharge = new TossPaymentCharge(parameter);
 		return tossPaymentCharge;
