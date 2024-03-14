@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.domain.consumer.exception;
+package com.snsclicksystem.main.domain.order.exception;
 
 
 public class NotEnoughConsumerAmountException extends Exception {

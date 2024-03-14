@@ -2,7 +2,7 @@ package com.snsclicksystem.main.adapter.out.persistence.order;
 
 import java.util.Optional;
 
-import com.snsclicksystem.main.adapter.out.api.order.dto.OrderedInfo;
+import com.snsclicksystem.main.domain.order.dto.OrderedInfo;
 import org.springframework.stereotype.Repository;
 
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
