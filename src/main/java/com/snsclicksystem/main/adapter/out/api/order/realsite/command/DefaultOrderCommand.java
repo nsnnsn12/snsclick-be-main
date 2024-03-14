@@ -1,28 +1,34 @@
 package com.snsclicksystem.main.adapter.out.api.order.realsite.command;
 
-import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
-import com.snsclicksystem.main.adapter.out.api.order.OrderApi;
 import com.snsclicksystem.main.adapter.out.api.order.dto.OrderedInfo;
+import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
-import com.snsclicksystem.main.domain.consumer.exception.NotEnoughApiAmountException;
-import com.snsclicksystem.main.domain.consumer.Consumer;
-import com.snsclicksystem.main.domain.order.Order;
 
 /**
- * Real site에 default type에 주문 요청시 필요한 작업을 가진 command
- * ex) default order 전후로 필요한 필터 등등
+ * 오직 default order를 실행하기 위한 책임만을 가진다.
  */
 public class DefaultOrderCommand extends RealSiteOrderCommand {
     private final DefaultOrderDto defaultOrderDto;
-    public DefaultOrderCommand(OrderApi<RealSiteClient, Integer> orderApi, DefaultOrderDto defaultOrderDto) {
-        super(orderApi);
+    public DefaultOrderCommand(RealSiteClient realSiteClient, DefaultOrderDto defaultOrderDto) {
+        super(realSiteClient);
         this.defaultOrderDto = defaultOrderDto;
     }
 
+    /**
+     * default order 실행
+     * @return 주문 후 생성된 결과
+     */
     @Override
-    public Order execute(Consumer consumer) throws NotEnoughApiAmountException {
+    protected OrderedInfo order() {
+        Integer orderId = realSiteClient.orderDefault(defaultOrderDto);
+        return getOrderedInfo(orderId);
+    }
+
+    /**
+     * 만약 각 주문마다 OrderedInfo를 생성하는 로직이 같다면 해당 메서드는 추상 클래스로 빼서 공통 처리할 예정
+     */
+    private OrderedInfo getOrderedInfo(Integer orderId){
         //TODO need to implement
-        OrderedInfo order = orderApi.order((realSiteClient -> realSiteClient.orderDefault(defaultOrderDto)));
-        return toOrder(order);
+        return new OrderedInfo();
     }
 }

@@ -1,7 +1,6 @@
 package com.snsclicksystem.main.adapter.in.order.factory;
 
 import com.snsclicksystem.main.adapter.in.order.dto.RequestOrder;
-import com.snsclicksystem.main.adapter.out.api.order.OrderApi;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.command.DefaultOrderCommand;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
@@ -15,14 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class RealSiteOrderCommandFactory implements OrderCommandFactory {
-    private final OrderApi<RealSiteClient, Integer> orderApi;
+    private final RealSiteClient realSiteClient;
     @Override
     public OrderCommand createOrderCommand(RequestOrder order) {
         /* TODO
             * 1. request order data validation 필요
             * 2. 조건에 따른 command 생성 필요
          */
-        return new DefaultOrderCommand(orderApi, createDefaultOrderDto(order));
+        return new DefaultOrderCommand(realSiteClient, createDefaultOrderDto(order));
     }
 
     private DefaultOrderDto createDefaultOrderDto(RequestOrder order){
