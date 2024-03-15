@@ -1,13 +1,14 @@
 package com.snsclicksystem.main.adapter.out.api.order.realsite.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Builder
 public class BaseOrderDto {
     private String apiKey;
     private String action;
+    private Long serviceId;
 }
