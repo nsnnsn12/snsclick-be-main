@@ -21,7 +21,6 @@ public class DefaultOrder extends RealSiteOrder {
      */
     @Override
     protected OrderedInfo order() {
-        //TODO api, parameter, defaultOrderDto를 이용하여 order 실행
         Integer orderId = realSiteClient.orderDefault(defaultOrderDto);
         return getOrderedInfo(orderId);
     }
