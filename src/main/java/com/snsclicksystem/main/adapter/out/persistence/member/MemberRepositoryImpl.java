@@ -9,7 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberJPARepository;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.item.SnsItem;
-import com.snsclicksystem.main.domain.member.Member;
+import com.snsclicksystem.main.domain.member.MemberInfo;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +28,14 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public Optional<Member> findById(Long id) {
+	public Optional<MemberInfo> findById(Long id) {
 		Optional<MemberEntity> member = jpaRepository.findById(id);
 		return member.map(this::getMemberFromModel);
+	}
+	
+	@Override
+	public Optional<MemberEntity> findEntityByLoginId(String LoginId) {
+		return jpaRepository.findEntityByLoginId(LoginId);
 	}
 	
 	@Override
@@ -38,8 +43,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 		return jpaRepository.findById(id);
 	}
 	
-	 private Member getMemberFromModel(MemberEntity entity){
-	        return Member.builder().email(entity.getEmail()).build();
+	 private MemberInfo getMemberFromModel(MemberEntity entity){
+	        return MemberInfo.builder().email(entity.getEmail()).build();
 	    }
 
 	@Override
@@ -47,6 +52,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 		jpaRepository.save(memberEntity);
 	}
 
-
+	@Override
+	public boolean existsByLoginId(String LoginId) {
+		return jpaRepository.existsByLoginId(LoginId);
+	}
 
 }

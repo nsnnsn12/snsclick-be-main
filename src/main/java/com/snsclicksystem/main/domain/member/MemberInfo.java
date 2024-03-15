@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class Member {
+public class MemberInfo {
 	private String email;
 }

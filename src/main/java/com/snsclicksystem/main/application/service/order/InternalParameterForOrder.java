@@ -1,9 +1,9 @@
 package com.snsclicksystem.main.application.service.order;
 
-import com.snsclicksystem.main.domain.member.Member;
+import com.snsclicksystem.main.domain.member.MemberInfo;
 import lombok.Builder;
 
 @Builder
 public class InternalParameterForOrder {
-    private Member member;
+    private MemberInfo member;
 }

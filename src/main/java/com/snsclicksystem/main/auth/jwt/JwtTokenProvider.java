@@ -15,6 +15,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import com.snsclicksystem.main.auth.dto.ResponseToken;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -35,28 +37,53 @@ public class JwtTokenProvider implements InitializingBean{
 	
 	private final String secret;
 	private final long tokenValidityInMilliseconds;
+	public final long tokenRefreshValidityInMilliseconds;
 	
 	
 	public JwtTokenProvider(@Value("${jwt.secret}") String secret,
-			@Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
+			@Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds,
+			@Value("${jwt.token-refresh-validity-in-seconds}") long tokenRefreshValidityInMilliseconds) {
 		this.secret = secret;
 		this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+		this.tokenRefreshValidityInMilliseconds = tokenRefreshValidityInMilliseconds * 1000;
 	}
 	
+    /**
+     * 회원 정보를 가지고 Access Token 생성
+     *
+     * @param authentication
+     * @return TokenResponse
+     */
+    public ResponseToken generateToken(Authentication authentication) {
+        // 생성한 Token 정보를 Response 에 담아 리턴
+        return ResponseToken.builder()
+                .accessToken(this.createAccessToken(authentication, tokenValidityInMilliseconds))
+                .refreshToken(this.createRefreshToken(tokenRefreshValidityInMilliseconds))
+                .build();
+    }	
+
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		byte[] keyBytes = Decoders.BASE64.decode(secret);
 		this.key = Keys.hmacShaKeyFor(keyBytes);
 	}
 	
-	public String createToken(Authentication authentication) {
+	public String createAccessToken(Authentication authentication, long tokenValidityInMilliseconds) {
 		// 권한 가져오기
         String authorities = this.convertToString(authentication);
         
         return Jwts.builder()
                 .setSubject(authentication.getName()) 
                 .claim(AUTORITIES_KEY, authorities) // 권한 정보
-                .setExpiration(getExpireTime()) // 만료 시간
+                .setExpiration(getExpireTime(tokenValidityInMilliseconds)) // 만료 시간
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+	}
+	
+	private String createRefreshToken(long tokenRefreshValidityInMilliseconds) {
+		return Jwts.builder()
+                .setExpiration(getExpireTime(tokenRefreshValidityInMilliseconds)) // 만료 시간
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 	}
@@ -115,8 +142,8 @@ public class JwtTokenProvider implements InitializingBean{
      * @param 
      * @return
      */
-	private Date getExpireTime() {
-		return new Date(new Date().getTime() + this.tokenValidityInMilliseconds);
+	private Date getExpireTime(long tokenSeconds) {
+		return new Date(new Date().getTime() + tokenSeconds);
 	}
 	
     /**
@@ -159,6 +186,17 @@ public class JwtTokenProvider implements InitializingBean{
         return Arrays.stream(data.split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+    }
+    
+    /**
+     * Refresh Token 저장에 사용될 key 값 생성
+     * -> 'RT:' + '로그인할 때 사용된 LoginID'
+     *
+     * @param authentication
+     * @return
+     */
+    public String getRefreshTokenKey(Authentication authentication) {
+        return "RT:" + authentication.getName();
     }
 
 }

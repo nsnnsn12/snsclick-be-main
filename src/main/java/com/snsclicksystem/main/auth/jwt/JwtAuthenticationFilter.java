@@ -39,12 +39,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		// Request Header 에서 토큰 추출
 		String accessToken = resolveToken((HttpServletRequest) request);
+		
 		// 토큰 정보가 있으면 유효성 검사
 		if (StringUtils.hasText(accessToken) && jwtProvider.validateToken(accessToken)) {
-			// Authentication 객체를 꺼냄
-			Authentication authentication = jwtProvider.getAuthentication(accessToken);
-			// Security Context 에 저장
-			SecurityContextHolder.getContext().setAuthentication(authentication);
+			Authentication authentication = jwtProvider.getAuthentication(accessToken); // Authentication 객체를 꺼냄
+			SecurityContextHolder.getContext().setAuthentication(authentication); // Security Context 에 저장
 		}
 		chain.doFilter(request, response);
 	}

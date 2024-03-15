@@ -33,5 +33,6 @@ jwt:
   #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
   #echo 'snsclick-be-main-spring-book-jwt-spring-security-snsclick-be-main-spring-book-jwt-spring-security' 이라는 문자열을 base64로 인코딩
   secret: c25zY2xpY2stYmUtbWFpbi1zcHJpbmctYm9vay1qd3Qtc3ByaW5nLWJvb2stand0LXNwcmluZy1zZWN1cml0eQ==
-  token-validity-in-seconds: 86400  # 초
+  token-validity-in-seconds: 3600  # 1시간 (초)
+  token-refresh-validity-in-seconds: 1209600  #14일
   
