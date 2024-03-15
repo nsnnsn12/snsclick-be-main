@@ -18,4 +18,9 @@ public class TransactionHistory extends BaseTimeEntity {
     @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity member;
+
+    private TransactionType transactionType;
+
+    @Column(name = "transaction_amount")
+    private Long amount;
 }
