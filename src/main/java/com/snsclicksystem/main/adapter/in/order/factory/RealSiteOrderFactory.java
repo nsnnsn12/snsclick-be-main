@@ -18,9 +18,11 @@ import lombok.RequiredArgsConstructor;
 public class RealSiteOrderFactory implements OrderFactory {
     private final RequestOrder order;
     protected final RealSiteClient realSiteClient;
+    private final String apiKey;
+    private static final String ADD = "add";
     @Override
-    public Order getCharge(InternalParameterForOrder parameter) {
-        BaseOrderDto baseOrderDto = BaseOrderDto.builder().apiKey(parameter.getApiKey()).action(parameter.getAction()).serviceId(parameter.getServiceId()).build();
+    public Order getOrder(InternalParameterForOrder parameter) {
+        BaseOrderDto baseOrderDto = BaseOrderDto.builder().apiKey(apiKey).action(ADD).serviceId(parameter.getItem().getServiceId()).build();
         OrderType orderType = parameter.getOrderType();
         switch (orderType) {
             case INSTAGRAM_KOREAN_FOLLOWER:

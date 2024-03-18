@@ -6,5 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class Member {
+	private Long id;
 	private String email;
+	private Long totalAmount;
 }

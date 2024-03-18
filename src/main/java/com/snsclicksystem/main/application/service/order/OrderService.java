@@ -22,9 +22,9 @@ public class OrderService implements OrderUseCase{
 	@Override
 	public Order createOrder(OrderFactory orderCommandFactory) throws NotEnoughApiAmountException, NotEnoughConsumerAmountException {
 
-		//TODO internalParameterForOrder에 apiKey, action, serviceId, orderType을 넣어서 생성
+		//TODO internalParameterForOrder에 apiKey, action, serviceId, orderType, snsItem을 넣어서 생성
 		Member member = Member.builder().build();
-		Order order = orderCommandFactory.getCharge(InternalParameterForOrder.builder().member(member).build());
+		Order order = orderCommandFactory.getOrder(InternalParameterForOrder.builder().member(member).build());
 		return orderRepository.save(order.execute()).orElseThrow(()->new RuntimeException("Fail to save order"));
 	}
 

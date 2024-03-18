@@ -7,30 +7,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * real site에 실제 주문을 하는 클라이언트
  */
-@FeignClient(name = "real-site", url = "${external.real-site.url}")
+@FeignClient(name = "real-site", url = "${real-site.url}")
 public interface RealSiteClient {
     //TODO need to test about these api
     @PostMapping("/api/v2")
-    Integer orderDefault(DefaultOrderDto defaultOrderDto);
+    Long orderDefault(DefaultOrderDto defaultOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderCustomComment(CustomCommentOrderDto customCommentOrderDto);
+    Long orderCustomComment(CustomCommentOrderDto customCommentOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderMentionsCustomList(MentionsCustomListOrderDto mentionsCustomListOrderDto);
+    Long orderMentionsCustomList(MentionsCustomListOrderDto mentionsCustomListOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderMentionsMediaLikers(MentionsMediaLikersOrderDto mentionsMediaLikersOrderDto);
+    Long orderMentionsMediaLikers(MentionsMediaLikersOrderDto mentionsMediaLikersOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderMentionsUserFollowers(MentionsUserFollowersOrderDto mentionsUserFollowersOrderDto);
+    Long orderMentionsUserFollowers(MentionsUserFollowersOrderDto mentionsUserFollowersOrderDto);
 
     @PostMapping("/api/v2")
-    Integer MentionsWithHashtags(MentionsWithHashtagsOrderDto mentionsWithHashtagsOrderDto);
+    Long MentionsWithHashtags(MentionsWithHashtagsOrderDto mentionsWithHashtagsOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderPackage(PackageOrderDto packageOrderDto);
+    Long orderPackage(PackageOrderDto packageOrderDto);
 
     @PostMapping("/api/v2")
-    Integer orderSubscription(SubscriptionsOrderDto subscribersOrderDto);
+    Long orderSubscription(SubscriptionsOrderDto subscribersOrderDto);
 }

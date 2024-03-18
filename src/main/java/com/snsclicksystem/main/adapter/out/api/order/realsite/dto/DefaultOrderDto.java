@@ -10,6 +10,7 @@ import lombok.Setter;
 public class DefaultOrderDto extends BaseOrderDto{
     private String link;
     private Integer quantity;
+    private Long orderBeforeQuantity;
     private Integer runs; //optional
     private Integer interval; //optional
 }

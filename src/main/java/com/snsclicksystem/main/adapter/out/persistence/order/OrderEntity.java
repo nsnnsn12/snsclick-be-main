@@ -3,7 +3,7 @@ package com.snsclicksystem.main.adapter.out.persistence.order;
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
 import com.snsclicksystem.main.adapter.out.persistence.item.ItemEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
-import com.snsclicksystem.main.adapter.out.persistence.transaction_history.TransactionHistory;
+import com.snsclicksystem.main.adapter.out.persistence.transaction_history.TransactionHistoryEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,16 +23,15 @@ public class OrderEntity extends BaseTimeEntity {
 
     @OneToOne
     @JoinColumn(name = "transaction_history_id")
-    private TransactionHistory transactionHistory;
+    private TransactionHistoryEntity transactionHistoryEntity;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
     private ItemEntity item;
-
     private Long externalOrderId;
     private String targetLink;
-
     private Long orderBeforeQuantity;
-
     private boolean completedStatus;
+    private Integer orderQuantity;
+
 }

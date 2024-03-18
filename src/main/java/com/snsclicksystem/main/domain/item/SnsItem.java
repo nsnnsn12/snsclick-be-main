@@ -8,12 +8,8 @@ import lombok.Getter;
 @Builder
 public class SnsItem {
     private Long id;
-    private String itemType;
-    private Integer itemPrice;
-    private Integer itemSolidPrice;
-    private Integer minOrderQuantity;
-    private Integer maxOrderQuantity;
-    private Boolean isRepeatable;
-    private Boolean isCancelable;
-    private Integer averageCompletionTime;
+    private Long serviceId;
+    private String name;
+    private String content;
+    private Integer price;
 }
