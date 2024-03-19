@@ -9,5 +9,5 @@ public class TransactionHistory {
     private Long id;
     private Long memberId;
     private TransactionType transactionType;
-    private Integer amount;
+    private Long amount;
 }

@@ -17,4 +17,8 @@ public class OrderedInfo {
     private Long orderBeforeQuantity;
     private boolean completedStatus;
     private Integer orderQuantity;
+
+    public void setTransactionHistory(TransactionHistory transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
 }
