@@ -36,14 +36,17 @@ public class JwtTokenProvider implements InitializingBean{
 	private static final String AUTORITIES_KEY = "auth";
 	
 	private final String secret;
+	private final String grantType;
 	private final long tokenValidityInMilliseconds;
 	public final long tokenRefreshValidityInMilliseconds;
 	
 	
 	public JwtTokenProvider(@Value("${jwt.secret}") String secret,
+			@Value("${jwt.grantType}") String grantType,
 			@Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds,
 			@Value("${jwt.token-refresh-validity-in-seconds}") long tokenRefreshValidityInMilliseconds) {
 		this.secret = secret;
+		this.grantType = grantType;
 		this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
 		this.tokenRefreshValidityInMilliseconds = tokenRefreshValidityInMilliseconds * 1000;
 	}
@@ -57,6 +60,7 @@ public class JwtTokenProvider implements InitializingBean{
     public ResponseToken generateToken(Authentication authentication) {
         // 생성한 Token 정보를 Response 에 담아 리턴
         return ResponseToken.builder()
+        		.grantType(grantType)
                 .accessToken(this.createAccessToken(authentication, tokenValidityInMilliseconds))
                 .refreshToken(this.createRefreshToken(tokenRefreshValidityInMilliseconds))
                 .build();

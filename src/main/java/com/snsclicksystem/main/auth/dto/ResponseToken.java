@@ -8,6 +8,8 @@ import lombok.Setter;
 @Getter
 @Builder
 public class ResponseToken {
+	private String grantType;
+	
 	private String accessToken;
 	
 	private String refreshToken;

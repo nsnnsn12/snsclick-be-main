@@ -1,7 +1,7 @@
 package com.snsclicksystem.main.application.service.charge;
 
 
-import com.snsclicksystem.main.domain.member.MemberInfo;
+import com.snsclicksystem.main.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,5 +11,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class InternalParameterForCharge {
-	private MemberInfo member;
+	private Member member;
 }

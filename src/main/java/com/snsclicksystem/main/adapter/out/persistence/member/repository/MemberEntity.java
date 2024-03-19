@@ -1,6 +1,8 @@
-package com.snsclicksystem.main.adapter.out.persistence.member;
+package com.snsclicksystem.main.adapter.out.persistence.member.repository;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
+import com.snsclicksystem.main.domain.member.enums.MemberSex;
+import com.snsclicksystem.main.domain.member.enums.MemberType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,13 +11,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity(name = "member")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)	//생성자 protected로 생성해서 생성자 사용불가하게 만듬
+@Builder
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)	//생성자 protected로 생성해서 생성자 사용불가하게 만듬
 public class MemberEntity extends BaseTimeEntity{
 
 	@Id
@@ -27,14 +29,17 @@ public class MemberEntity extends BaseTimeEntity{
 	
 	private String password;
 	
-	private Long totalAmount; 
-	
 	private String email;
+	
+	private Long totAmount; 
+	
+	private Long corpNum;
+	
+	@Enumerated(EnumType.STRING)
+	private MemberSex memberSex;
 	
 	@Enumerated(EnumType.STRING)
 	private MemberType memberType;
 
-	public MemberEntity(String email) {
-		this.email = email;
-	}
+	
 }

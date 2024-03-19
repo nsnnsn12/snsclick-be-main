@@ -2,7 +2,7 @@ package com.snsclicksystem.main.application.service.charge;
 
 
 import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
-import com.snsclicksystem.main.domain.member.MemberInfo;
+import com.snsclicksystem.main.domain.member.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.snsclicksystem.main.domain.charge.exception.ChargeRequestFailException;
@@ -35,7 +35,7 @@ public class ChargeService implements ChargeUseCase {
 		//사용자를 가져온다.
 		//아마 authentication 이용해서 사용자 id나 email 받은 다음 그 정보로 조회하면 될 것 같습니다.
 //		MemberEntity member = memberRepository.findEntityById(charge.getMemberId()).get();
-		MemberInfo member = MemberInfo.builder().build();
+		Member member = Member.builder().build();
 		//충전 시 필요한 파라미터를 받아 충전 객체를 생성한다.
 		Charge charge = chargeFactory.getCharge(InternalParameterForCharge.builder().member(member).build());
 

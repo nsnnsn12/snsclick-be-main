@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.adapter.out.persistence.member;
+package com.snsclicksystem.main.domain.member.enums;
 
 public enum MemberType {
 
@@ -7,4 +7,8 @@ public enum MemberType {
 	 public String getGrantedAuthority() {
 	        return "ROLE_" + name();
 	    }
+	 
+	 public String getMemberType() {
+		 return name();
+	 }
 }

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString	//TODO : DELETE
+@ToString	
 public class RequestSignIn {
 
 	@NotNull

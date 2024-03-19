@@ -1,7 +1,7 @@
 package com.snsclicksystem.main.adapter.out.persistence.charge;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
-import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
+import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

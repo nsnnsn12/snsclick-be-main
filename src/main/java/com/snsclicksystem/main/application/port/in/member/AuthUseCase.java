@@ -1,6 +1,8 @@
 package com.snsclicksystem.main.application.port.in.member;
 
+import com.snsclicksystem.main.application.service.member.MemberFactory;
 import com.snsclicksystem.main.auth.dto.ResponseToken;
+import com.snsclicksystem.main.domain.member.Member;
 import com.snsclicksystem.main.domain.member.exception.MemberNotFoundException;
 
 public interface AuthUseCase {

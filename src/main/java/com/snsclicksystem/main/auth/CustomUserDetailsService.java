@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
+import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomUserDetailsService implements UserDetailsService{
 	
 	private final MemberRepository memberRepository;
-	
-	//TODO : 회원가입 시 암호화해서 비밀번호 저장 (해당 기능 구현 시 Delete)
-	private final PasswordEncoder passwordEncoder;
 	
 	
 	@Override
@@ -36,8 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	private UserDetails createUserDetails(MemberEntity member) {
 		return User.builder()
 				.username(member.getLoginId())
-				//TODO : 회원가입 시 암호화해서 비밀번호 저장 (해당 기능 구현 시 encode 함수 제거)
-				.password(passwordEncoder.encode(member.getPassword()))
+				.password(member.getPassword())
 				.roles(member.getMemberType().toString())
 				.build();
 	}

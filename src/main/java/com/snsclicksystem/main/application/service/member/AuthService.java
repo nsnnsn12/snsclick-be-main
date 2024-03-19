@@ -3,12 +3,14 @@ package com.snsclicksystem.main.application.service.member;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.snsclicksystem.main.application.port.in.member.AuthUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.auth.dto.ResponseToken;
 import com.snsclicksystem.main.auth.jwt.JwtTokenProvider;
+import com.snsclicksystem.main.domain.member.Member;
 import com.snsclicksystem.main.domain.member.exception.MemberNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -39,5 +41,4 @@ public class AuthService implements AuthUseCase{
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         return jwtTokenProvider.generateToken(authentication);
 	}
-
 }

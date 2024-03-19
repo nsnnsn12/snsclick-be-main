@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.adapter.out.persistence.member;
+package com.snsclicksystem.main.adapter.out.persistence.member.repository;
 
 import java.util.Optional;
 
@@ -9,6 +9,8 @@ public interface MemberJPARepository extends JpaRepository<MemberEntity, Long> {
 	Optional<MemberEntity> findByEmail(String email);
 
 	Optional<MemberEntity> findEntityByLoginId(String loginId); 
+	
+	boolean existsByEmail(String email);
 	
 	boolean existsByLoginId(String LoginId);
 }
