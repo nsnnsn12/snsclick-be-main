@@ -1,6 +1,6 @@
 package com.snsclicksystem.main.domain.order.dto;
 
-import com.snsclicksystem.main.domain.item.SnsItem;
+import com.snsclicksystem.main.domain.item.Item;
 import com.snsclicksystem.main.domain.transaction_history.TransactionHistory;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Getter;
 @Builder
 public class OrderedInfo {
     private Long id;
-    private SnsItem item;
+    private Item item;
     private TransactionHistory transactionHistory;
     private Long memberId;
     private Long externalOrderId;

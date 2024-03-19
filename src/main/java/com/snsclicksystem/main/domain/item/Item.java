@@ -6,9 +6,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class SnsItem {
+public class Item {
     private Long id;
-    private Long serviceId;
     private String name;
     private String content;
     private Integer price;
