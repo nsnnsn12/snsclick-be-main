@@ -6,5 +6,5 @@ import com.snsclicksystem.main.domain.order.exception.NotEnoughConsumerAmountExc
 import com.snsclicksystem.main.domain.order.Order;
 
 public interface OrderUseCase {
-	Order createOrder(OrderFactory orderCommandFactory) throws NotEnoughApiAmountException, NotEnoughConsumerAmountException;
+	Order createOrder(OrderFactory orderCommandFactory, Long itemId) throws NotEnoughApiAmountException, NotEnoughConsumerAmountException;
 }

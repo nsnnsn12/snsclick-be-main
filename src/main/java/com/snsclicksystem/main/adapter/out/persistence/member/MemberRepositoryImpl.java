@@ -5,13 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.snsclicksystem.main.adapter.out.persistence.member.MemberJPARepository;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
-import com.snsclicksystem.main.domain.item.SnsItem;
 import com.snsclicksystem.main.domain.member.Member;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Repository
