@@ -8,6 +8,9 @@ import lombok.Getter;
 @Entity(name="real_site")
 @Getter
 public class RealSiteEntity extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "real_site_id")
     private Long id;
     @OneToOne
     @JoinColumn(name = "item_id")
