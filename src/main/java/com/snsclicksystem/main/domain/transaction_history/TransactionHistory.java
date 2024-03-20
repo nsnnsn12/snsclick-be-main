@@ -10,4 +10,8 @@ public class TransactionHistory {
     private Long memberId;
     private TransactionType transactionType;
     private Long amount;
+
+    public void saveId(Long id) {
+        this.id = id;
+    }
 }

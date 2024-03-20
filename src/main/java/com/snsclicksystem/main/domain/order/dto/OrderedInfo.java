@@ -18,7 +18,7 @@ public class OrderedInfo {
     private boolean completedStatus;
     private Integer orderQuantity;
 
-    public void setTransactionHistory(TransactionHistory transactionHistory) {
-        this.transactionHistory = transactionHistory;
+    public void saveId(Long id) {
+        this.id = id;
     }
 }

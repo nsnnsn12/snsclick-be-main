@@ -17,16 +17,8 @@ public class TransactionHistoryRepositoryImpl implements TransactionHistoryRepos
 
     public TransactionHistory save(TransactionHistory transactionHistory) {
         TransactionHistoryEntity save = jpaRepository.save(toEntity(transactionHistory));
-        return toDomain(save);
-    }
-
-    private TransactionHistory toDomain(TransactionHistoryEntity entity) {
-        return TransactionHistory.builder()
-                .id(entity.getId())
-                .memberId(entity.getMember().getId())
-                .transactionType(entity.getTransactionType())
-                .amount(entity.getAmount())
-                .build();
+        transactionHistory.saveId(save.getId());
+        return transactionHistory;
     }
 
     private TransactionHistoryEntity toEntity(TransactionHistory transactionHistory) {

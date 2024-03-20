@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.snsclicksystem.main.application.port.in.order.OrderUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
-import com.snsclicksystem.main.domain.order.Order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,7 @@ public class OrderService implements OrderUseCase{
 	private final TransactionHistoryRepository transactionHistoryRepository;
 
 	@Override
-	public Order createOrder(OrderFactory orderCommandFactory, Long itemId) throws NotEnoughApiAmountException, NotEnoughConsumerAmountException {
+	public OrderedInfo createOrder(OrderFactory orderCommandFactory, Long itemId) throws NotEnoughApiAmountException, NotEnoughConsumerAmountException {
 
 		//TODO need to implement finding member
 		Member member = Member.builder().build();
@@ -37,8 +36,7 @@ public class OrderService implements OrderUseCase{
 				.execute();
 
 		TransactionHistory savedTransactionHistory = transactionHistoryRepository.save(orderedInfo.getTransactionHistory());
-		orderedInfo.setTransactionHistory(savedTransactionHistory);
-		return orderRepository.save(orderedInfo).orElseThrow(()->new RuntimeException("Fail to save order"));
+		return orderRepository.save(orderedInfo, savedTransactionHistory);
 	}
 
 }
