@@ -6,7 +6,7 @@ import com.snsclicksystem.main.adapter.out.api.order.realsite.command.DefaultOrd
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.BaseOrderDto;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
 import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteEntity;
-import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteRepositoryImpl;
+import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteRepository;
 import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteType;
 import com.snsclicksystem.main.application.service.order.InternalParameterForOrder;
 import com.snsclicksystem.main.application.service.order.OrderFactory;
@@ -21,11 +21,11 @@ public class RealSiteOrderFactory implements OrderFactory {
     private final RequestOrder order;
     protected final RealSiteClient realSiteClient;
     private final String apiKey;
-    private final RealSiteRepositoryImpl realSiteRepository;
+    private final RealSiteRepository realSiteRepository;
     private static final String ADD = "add";
     @Override
     public Order getOrder(InternalParameterForOrder parameter) {
-        RealSiteEntity realSiteEntity = realSiteRepository.findByItemId(order.getItemId()).orElseThrow(() -> new IllegalArgumentException("해당 아이템이 존재하지 않습니다."));
+        RealSiteEntity realSiteEntity = realSiteRepository.findByItemId(order.getItemId());
         RealSiteType realSiteType = realSiteEntity.getRealSiteType();
 
         BaseOrderDto baseOrderDto = BaseOrderDto.builder().apiKey(apiKey).action(ADD).serviceId(realSiteEntity.getServiceId()).build();

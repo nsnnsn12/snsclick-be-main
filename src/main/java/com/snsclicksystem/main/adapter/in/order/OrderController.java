@@ -2,7 +2,7 @@ package com.snsclicksystem.main.adapter.in.order;
 
 import com.snsclicksystem.main.adapter.in.order.factory.RealSiteOrderFactory;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
-import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteRepositoryImpl;
+import com.snsclicksystem.main.adapter.out.persistence.real_site.RealSiteRepository;
 import com.snsclicksystem.main.domain.order.exception.NotEnoughApiAmountException;
 import com.snsclicksystem.main.domain.order.exception.NotEnoughConsumerAmountException;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +32,7 @@ public class OrderController {
 	private final RealSiteClient realSiteClient;
 	@Value("${real-site.api-key}")
 	private final String REAL_SITE_API_KEY;
-	private final RealSiteRepositoryImpl realSiteRepository;
+	private final RealSiteRepository realSiteRepository;
 
 	@PostMapping("/")
 	public ResponseEntity<ResponseOrder> orders(@RequestBody @Validated RequestOrder order) {
