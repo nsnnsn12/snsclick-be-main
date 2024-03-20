@@ -25,24 +25,24 @@ public class ItemRepositoryImpl implements ItemRepository {
         return item.map(this::getSnsItemFromModel);
     }
 
-    @Override
-    public List<Item> findByItemTypeAndGreaterItemPrice(ItemCriteria criteria) {
-        List<ItemEntity> fetch = jpaQueryFactory.selectFrom(itemEntity)
-                .where(eqItemType(criteria.getItemType()),
-                        graterItemType(criteria.getItemPrice()))
-                .fetch();
-        return fetch.stream().map(this::getSnsItemFromModel).toList();
-    }
-
-    private BooleanExpression eqItemType(String itemType){
-        if(!StringUtils.hasText(itemType)) return null;
-        return itemEntity.itemType.eq(itemType);
-    }
-
-    private BooleanExpression graterItemType(Integer itemPrice){
-        if(itemPrice == null) return null;
-        return itemEntity.itemPrice.goe(itemPrice);
-    }
+//    @Override
+//    public List<Item> findByItemTypeAndGreaterItemPrice(ItemCriteria criteria) {
+//        List<ItemEntity> fetch = jpaQueryFactory.selectFrom(itemEntity)
+//                .where(eqItemType(criteria.getItemType()),
+//                        graterItemType(criteria.getItemPrice()))
+//                .fetch();
+//        return fetch.stream().map(this::getSnsItemFromModel).toList();
+//    }
+//
+//    private BooleanExpression eqItemType(String itemType){
+//        if(!StringUtils.hasText(itemType)) return null;
+//        return itemEntity.itemType.eq(itemType);
+//    }
+//
+//    private BooleanExpression graterItemType(Integer itemPrice){
+//        if(itemPrice == null) return null;
+//        return itemEntity.itemPrice.goe(itemPrice);
+//    }
 
     private Item getSnsItemFromModel(ItemEntity entity){
         //TODO need to implement

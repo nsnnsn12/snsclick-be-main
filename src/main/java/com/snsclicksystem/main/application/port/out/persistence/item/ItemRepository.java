@@ -7,6 +7,4 @@ import java.util.Optional;
 
 public interface ItemRepository {
     Optional<Item> findById(Long id);
-
-    List<Item> findByItemTypeAndGreaterItemPrice(ItemCriteria criteria);
 }
