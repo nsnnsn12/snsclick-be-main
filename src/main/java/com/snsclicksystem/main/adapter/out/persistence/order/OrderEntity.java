@@ -23,12 +23,11 @@ public class OrderEntity extends BaseTimeEntity {
 
     @OneToOne
     @JoinColumn(name = "transaction_history_id")
-    private TransactionHistoryEntity transactionHistoryEntity;
+    private TransactionHistoryEntity transactionHistory;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
     private ItemEntity item;
-    private Long externalOrderId;
     private String targetLink;
     private Long orderBeforeQuantity;
     private boolean completedStatus;
