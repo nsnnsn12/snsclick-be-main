@@ -12,7 +12,7 @@ public class OrderedInfo {
     private Item item;
     private TransactionHistory transactionHistory;
     private Long memberId;
-    private Long externalOrderId;
+    private Long externalOrderedId;
     private String targetLink;
     private Long orderBeforeQuantity;
     private boolean completedStatus;

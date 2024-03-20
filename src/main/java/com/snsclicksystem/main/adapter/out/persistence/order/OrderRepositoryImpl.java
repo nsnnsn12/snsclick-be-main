@@ -43,6 +43,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 				.orderBeforeQuantity(orderedInfo.getOrderBeforeQuantity())
 				.completedStatus(orderedInfo.isCompletedStatus())
 				.orderQuantity(orderedInfo.getOrderQuantity())
+				.externalOrderedId(orderedInfo.getExternalOrderedId())
 				.build();
 	}
 }

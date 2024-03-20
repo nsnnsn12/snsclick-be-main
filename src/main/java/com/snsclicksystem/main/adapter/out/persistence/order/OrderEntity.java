@@ -33,4 +33,6 @@ public class OrderEntity extends BaseTimeEntity {
     private boolean completedStatus;
     private Integer orderQuantity;
 
+    private Long externalOrderedId;
+
 }

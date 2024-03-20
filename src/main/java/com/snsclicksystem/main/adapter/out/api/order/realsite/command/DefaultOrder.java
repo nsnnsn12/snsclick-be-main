@@ -24,8 +24,8 @@ public class DefaultOrder extends RealSiteOrder {
      */
     @Override
     protected OrderedInfo order() {
-        Long orderId = realSiteClient.orderDefault(defaultOrderDto);
-        return getOrderedInfo(orderId);
+        Long orderedId = realSiteClient.orderDefault(defaultOrderDto);
+        return getOrderedInfo(orderedId);
     }
 
     //TODO 이 부분도 공통화가 공통화가 가능하면 RealSiteOrder로 옮기는 것이 좋을 듯.
@@ -37,11 +37,11 @@ public class DefaultOrder extends RealSiteOrder {
     }
 
     //TODO 나중에 RealSiteOrder 내의 공통 타입을 한 번 더 묶어 getOrderedInfo, getTransactionHistory 메서드를 RealSiteOrder로 옮기는 것이 좋을 듯.
-    private OrderedInfo getOrderedInfo(Long orderId){
+    private OrderedInfo getOrderedInfo(Long orderedId){
         return OrderedInfo.builder().item(parameter.getItem())
                 .transactionHistory(getTransactionHistory())
                 .memberId(parameter.getMember().getId())
-                .externalOrderId(orderId)
+                .externalOrderedId(orderedId)
                 .targetLink(defaultOrderDto.getLink())
                 .orderBeforeQuantity(defaultOrderDto.getOrderBeforeQuantity())
                 .completedStatus(false)

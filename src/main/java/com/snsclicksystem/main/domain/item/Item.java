@@ -10,5 +10,5 @@ public class Item {
     private Long id;
     private String name;
     private String content;
-    private Integer price;
+    private Long price;
 }
