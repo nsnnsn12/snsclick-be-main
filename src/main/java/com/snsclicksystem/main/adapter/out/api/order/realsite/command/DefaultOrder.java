@@ -1,6 +1,6 @@
 package com.snsclicksystem.main.adapter.out.api.order.realsite.command;
 
-import com.snsclicksystem.main.domain.order.dto.OrderedInfo;
+import com.snsclicksystem.main.domain.order.dto.OrderedInfoDto;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
 import com.snsclicksystem.main.application.service.order.InternalParameterForOrder;
@@ -23,7 +23,7 @@ public class DefaultOrder extends RealSiteOrder {
      * @return 주문 후 생성된 결과
      */
     @Override
-    protected OrderedInfo order() {
+    protected OrderedInfoDto order() {
         Long orderedId = realSiteClient.orderDefault(defaultOrderDto);
         return getOrderedInfo(orderedId);
     }
@@ -37,8 +37,8 @@ public class DefaultOrder extends RealSiteOrder {
     }
 
     //TODO 나중에 RealSiteOrder 내의 공통 타입을 한 번 더 묶어 getOrderedInfo, getTransactionHistory 메서드를 RealSiteOrder로 옮기는 것이 좋을 듯.
-    private OrderedInfo getOrderedInfo(Long orderedId){
-        return OrderedInfo.builder().item(parameter.getItem())
+    private OrderedInfoDto getOrderedInfo(Long orderedId){
+        return OrderedInfoDto.builder().item(parameter.getItem())
                 .transactionHistory(getTransactionHistory())
                 .memberId(parameter.getMember().getId())
                 .externalOrderedId(orderedId)

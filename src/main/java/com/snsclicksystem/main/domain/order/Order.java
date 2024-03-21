@@ -1,7 +1,7 @@
 package com.snsclicksystem.main.domain.order;
 
 import com.snsclicksystem.main.application.service.order.InternalParameterForOrder;
-import com.snsclicksystem.main.domain.order.dto.OrderedInfo;
+import com.snsclicksystem.main.domain.order.dto.OrderedInfoDto;
 import com.snsclicksystem.main.domain.order.exception.NotEnoughApiAmountException;
 import com.snsclicksystem.main.domain.order.exception.NotEnoughConsumerAmountException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public abstract class Order {
      * @return 주문 결과
      * @throws NotEnoughApiAmountException 주문을 실행할 수 있는 api가 부족할 때
      */
-    public final OrderedInfo execute() throws NotEnoughApiAmountException, NotEnoughConsumerAmountException {
+    public final OrderedInfoDto execute() throws NotEnoughApiAmountException, NotEnoughConsumerAmountException {
         canOrder();
         return order();
     }
@@ -26,7 +26,7 @@ public abstract class Order {
         isMoneyEnough();
     }
 
-    protected abstract OrderedInfo order() throws NotEnoughApiAmountException;
+    protected abstract OrderedInfoDto order() throws NotEnoughApiAmountException;
 
     protected abstract void isMoneyEnough() throws NotEnoughConsumerAmountException;
 }

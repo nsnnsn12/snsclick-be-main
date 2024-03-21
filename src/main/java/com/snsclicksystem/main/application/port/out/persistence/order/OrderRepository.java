@@ -1,9 +1,8 @@
 package com.snsclicksystem.main.application.port.out.persistence.order;
-import com.snsclicksystem.main.domain.order.dto.OrderedInfo;
-import com.snsclicksystem.main.domain.transaction_history.TransactionHistory;
+import com.snsclicksystem.main.domain.order.dto.OrderedInfoDto;
 
 public interface OrderRepository {
 
-	OrderedInfo save(OrderedInfo order, TransactionHistory transactionHistory);
+	OrderedInfoDto save(OrderedInfoDto order);
 
 }

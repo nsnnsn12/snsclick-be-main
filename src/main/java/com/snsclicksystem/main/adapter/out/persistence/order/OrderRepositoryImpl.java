@@ -7,8 +7,7 @@ import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.adapter.out.persistence.member.MemberJPARepository;
 import com.snsclicksystem.main.adapter.out.persistence.transaction_history.TransactionHistoryEntity;
 import com.snsclicksystem.main.adapter.out.persistence.transaction_history.TransactionHistoryJPARepository;
-import com.snsclicksystem.main.domain.order.dto.OrderedInfo;
-import com.snsclicksystem.main.domain.transaction_history.TransactionHistory;
+import com.snsclicksystem.main.domain.order.dto.OrderedInfoDto;
 import org.springframework.stereotype.Repository;
 
 import com.snsclicksystem.main.application.port.out.persistence.order.OrderRepository;
@@ -24,26 +23,26 @@ public class OrderRepositoryImpl implements OrderRepository{
 	private final OrderJPARepository jpaRepository;
 	private final JPAQueryFactory jpaQueryFactory;
 	@Override
-	public OrderedInfo save(OrderedInfo order, TransactionHistory transactionHistory) {
-		OrderEntity savedOrder = jpaRepository.save(toEntity(order, transactionHistory));
+	public OrderedInfoDto save(OrderedInfoDto order) {
+		OrderEntity savedOrder = jpaRepository.save(toEntity(order));
 		order.saveId(savedOrder.getId());
 		return order;
 	}
 
-	private OrderEntity toEntity(OrderedInfo orderedInfo, TransactionHistory transactionHistory) {
-		MemberEntity member = memberJPARepository.getReferenceById(orderedInfo.getMemberId());
-		ItemEntity item = itemJPARepository.getReferenceById(orderedInfo.getItem().getId());
-		TransactionHistoryEntity transactionHistoryEntity = transactionHistoryJPARepository.getReferenceById(transactionHistory.getId());
+	private OrderEntity toEntity(OrderedInfoDto orderedInfoDto) {
+		MemberEntity member = memberJPARepository.getReferenceById(orderedInfoDto.getMemberId());
+		ItemEntity item = itemJPARepository.getReferenceById(orderedInfoDto.getItem().getId());
+		TransactionHistoryEntity transactionHistoryEntity = transactionHistoryJPARepository.getReferenceById(orderedInfoDto.getTransactionHistory().getId());
 
 		return OrderEntity.builder()
 				.member(member)
 				.transactionHistory(transactionHistoryEntity)
 				.item(item)
-				.targetLink(orderedInfo.getTargetLink())
-				.orderBeforeQuantity(orderedInfo.getOrderBeforeQuantity())
-				.completedStatus(orderedInfo.isCompletedStatus())
-				.orderQuantity(orderedInfo.getOrderQuantity())
-				.externalOrderedId(orderedInfo.getExternalOrderedId())
+				.targetLink(orderedInfoDto.getTargetLink())
+				.orderBeforeQuantity(orderedInfoDto.getOrderBeforeQuantity())
+				.completedStatus(orderedInfoDto.isCompletedStatus())
+				.orderQuantity(orderedInfoDto.getOrderQuantity())
+				.externalOrderedId(orderedInfoDto.getExternalOrderedId())
 				.build();
 	}
 }

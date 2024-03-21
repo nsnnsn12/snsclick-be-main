@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class OrderedInfo {
+public class OrderedInfoDto {
     private Long id;
     private Item item;
     private TransactionHistory transactionHistory;
@@ -20,5 +20,8 @@ public class OrderedInfo {
 
     public void saveId(Long id) {
         this.id = id;
+    }
+    public void setTransactionHistory(TransactionHistory transactionHistory) {
+        this.transactionHistory = transactionHistory;
     }
 }
