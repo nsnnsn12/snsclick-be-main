@@ -44,16 +44,24 @@ public class SignUpFactory implements MemberFactory{
 		}
 	}
 	
+	private SignUp getNormalMember(BaseMemberDto baseMemberDto, InternalParameterForMember parameter) {
+		NormalMemberDto normalMemberDto = new NormalMemberDto(baseMemberDto.getLoginId(),
+															  baseMemberDto.getPassword(),
+															  baseMemberDto.getEmail(),
+															  baseMemberDto.getMemberType());
+		normalMemberDto.setSex(request.getMemberSex());
+		return new NormalMember(normalMemberDto, parameter.getMemberRepository());
+	}
+	
 	private SignUp getCorpMember(BaseMemberDto baseMemberDto, InternalParameterForMember parameter) {
-		CorpMemberDto corpMemberDto = (CorpMemberDto) baseMemberDto;
+		CorpMemberDto corpMemberDto = new CorpMemberDto(baseMemberDto.getLoginId(),
+				  										baseMemberDto.getPassword(),
+														baseMemberDto.getEmail(),
+														baseMemberDto.getMemberType());
 		corpMemberDto.setCorpNum(request.getCorpNum());
 		return new CorpMember(corpMemberDto, parameter.getMemberRepository());
 	}
 
-	private SignUp getNormalMember(BaseMemberDto baseMemberDto, InternalParameterForMember parameter) {
-		NormalMemberDto normalMemberDto = (NormalMemberDto) baseMemberDto;
-		normalMemberDto.setSex(request.getMemberSex());
-		return new NormalMember(normalMemberDto, parameter.getMemberRepository());
-	}
+
 
 }

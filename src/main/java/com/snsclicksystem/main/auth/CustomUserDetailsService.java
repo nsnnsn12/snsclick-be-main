@@ -1,5 +1,7 @@
 package com.snsclicksystem.main.auth;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
+import com.snsclicksystem.main.domain.member.Member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomUserDetailsService implements UserDetailsService{
 	
 	private final MemberRepository memberRepository;
-	
 	
 	@Override
 	@Transactional

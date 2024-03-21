@@ -35,7 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthController {
 
     private final AuthUseCase authUseCase;
-    private final MemberUseCase memberUseCase;
     private final ObjectMapper objectMapper;
 
     @PostMapping("/signIn")
@@ -51,7 +50,7 @@ public class AuthController {
     @PostMapping("/signUp")
     public ResponseEntity<ResponseSignUp> signUp(@Valid @RequestBody RequestSignUp request) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
 		try {
-			return new ResponseEntity<>(objectMapper.convert(memberUseCase.createMember(new SignUpFactory(request)), ResponseSignUp.class), HttpStatus.OK);
+			return new ResponseEntity<>(objectMapper.convert(authUseCase.createMember(new SignUpFactory(request)), ResponseSignUp.class), HttpStatus.OK);
 		} catch(DuplicateMemberEmailException | DuplicateMemberLoginIdException e) {
 			throw new NoCreateException(e.getMessage());
 		}

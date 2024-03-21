@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.snsclicksystem.main.auth.exception.JwtAccessDeniedHandler;
@@ -29,41 +30,31 @@ public class SecurityConfig {
 	private final JwtTokenProvider tokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-	
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity
-				.csrf(AbstractHttpConfigurer::disable)
-				.exceptionHandling((handling) -> 
-						handling.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-								.accessDeniedHandler(jwtAccessDeniedHandler)
-				)
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-				.headers((header) -> 
-					header.frameOptions(
-								HeadersConfigurer.FrameOptionsConfig::sameOrigin
-					)
-				)
-				
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(AbstractHttpConfigurer::disable)
+
+				.exceptionHandling((handling) -> handling.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+						.accessDeniedHandler(jwtAccessDeniedHandler))
+
+				.headers((header) -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+
 				// 토큰을 활욜하면 세션이 필요 없어지므로 STATELESS 로 설정.
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				
 				.authorizeHttpRequests(
-						registry -> registry
-								.requestMatchers("/auth/signIn").permitAll()
-								.requestMatchers("/auth/signUp").permitAll()
-								.anyRequest().authenticated()
-								
-				)
+						registry -> registry.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
+				
 				// JWT 인증을 위해 직접 구현한 필터를 UsernamePasswordAuthenticationFilter 전에 실행
 				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
-                        UsernamePasswordAuthenticationFilter.class
-                );
-		return httpSecurity.build();
+						UsernamePasswordAuthenticationFilter.class)
+				;
+
+		return http.build();
 	}
 }

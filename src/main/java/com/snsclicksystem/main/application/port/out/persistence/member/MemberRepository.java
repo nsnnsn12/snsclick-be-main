@@ -28,6 +28,8 @@ public interface MemberRepository {
 
 	public boolean existsByEmail(String email);
 
+	public Optional<Member> findByLoginId(String LoginId);
+
 	
 
 	

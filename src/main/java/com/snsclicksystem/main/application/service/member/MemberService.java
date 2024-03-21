@@ -2,6 +2,7 @@ package com.snsclicksystem.main.application.service.member;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.snsclicksystem.main.application.port.in.member.MemberUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
@@ -16,17 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class MemberService implements MemberUseCase{
 	
-	private final MemberRepository memberRepository;
-	private final PasswordEncoder encoder;
-	
-	@Override
-	public Member createMember(MemberFactory memberCommandFactory) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
-		SignUp signUp = memberCommandFactory.getMember(InternalParameterForMember.builder().encoder(encoder).memberRepository(memberRepository).build());
-		
-		//TODO : Exception customizing
-		return memberRepository.save(signUp.execute());
-	}
+
 	
 }

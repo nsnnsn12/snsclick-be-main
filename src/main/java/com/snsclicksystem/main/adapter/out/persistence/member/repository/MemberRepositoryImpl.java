@@ -41,10 +41,15 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 	
 	@Override
+	public Optional<Member> findByLoginId(String LoginId) {
+		Optional<MemberEntity> member = jpaRepository.findByLoginId(LoginId);
+		return member.map(this::getMemberFromModel);
+	}
+	
+	@Override
 	public Optional<MemberEntity> findEntityById(Long id) {
 		return jpaRepository.findById(id);
 	}
-	
 
 
 	@Override
@@ -64,24 +69,29 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override
 	public Member save(MemberInfo memberInfo) {
-		MemberEntity entity = jpaRepository.save(fromMemberInfo(memberInfo));
+		MemberEntity entity = jpaRepository.save(MemberEntity.createMemberEntity(memberInfo));
 		return (getMemberFromModel(entity));
 	}
 	
-	private MemberEntity fromMemberInfo(MemberInfo memberInfo){
-		return MemberEntity.builder()
-					.loginId(memberInfo.getLoginId())
-					.password(memberInfo.getPassword())
-					.email(memberInfo.getEmail())
-					.memberType(memberInfo.getMemberType())
-					.memberSex(memberInfo.getMemberSex())
-					.corpNum(memberInfo.getCorpNum())
-					.totAmount(memberInfo.getTotAmount())
-					.build();
-	}
+//	private MemberEntity fromMemberInfo(MemberInfo memberInfo){
+//		return MemberEntity.builder()
+//					.loginId(memberInfo.getLoginId())
+//					.password(memberInfo.getPassword())
+//					.email(memberInfo.getEmail())
+//					.memberType(memberInfo.getMemberType())
+//					.memberSex(memberInfo.getMemberSex())
+//					.corpNum(memberInfo.getCorpNum())
+//					.totAmount(memberInfo.getTotAmount())
+//					.build();
+//	}
 	
 	 private Member getMemberFromModel(MemberEntity entity){
-	        return Member.builder().email(entity.getEmail()).build();
+	        return Member.builder()
+	        			.loginId(entity.getLoginId())
+	        			.email(entity.getEmail())
+	        			.password(entity.getPassword())
+	        			.memberType(entity.getMemberType())
+	        			.build();
 	  }
 	
 

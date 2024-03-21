@@ -1,19 +1,22 @@
 package com.snsclicksystem.main.domain.member;
 
-import com.snsclicksystem.main.application.service.member.InternalParameterForMember;
-import com.snsclicksystem.main.domain.member.dto.MemberInfo;
-import com.snsclicksystem.main.domain.order.exception.NotEnoughApiAmountException;
+
+import com.snsclicksystem.main.domain.member.enums.MemberType;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Builder
+@Getter
 public class Member {
+	
+	private String loginId;
 	
 	private String email;
 	
-
+	private String password;
+	
+	private MemberType memberType;
 
 	
 }

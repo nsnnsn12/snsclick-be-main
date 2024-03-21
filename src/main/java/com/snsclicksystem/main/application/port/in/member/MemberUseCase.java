@@ -8,6 +8,4 @@ import com.snsclicksystem.main.domain.member.exception.DuplicateMemberLoginIdExc
 
 public interface MemberUseCase {
 
-	public Member createMember(MemberFactory memberCommandFactory) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException;
-
 }
