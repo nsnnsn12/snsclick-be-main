@@ -25,8 +25,12 @@ public abstract class Order {
     private void canOrder() throws NotEnoughConsumerAmountException{
         isMoneyEnough();
     }
+    private void isMoneyEnough() throws NotEnoughConsumerAmountException{
+        if(parameter.getMember().getTotalAmount() < getPrice()){
+            throw new NotEnoughConsumerAmountException();
+        }
+    }
 
     protected abstract OrderedInfoDto order() throws NotEnoughApiAmountException;
-
-    protected abstract void isMoneyEnough() throws NotEnoughConsumerAmountException;
+    protected abstract Long getPrice();
 }
