@@ -9,7 +9,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
-import com.snsclicksystem.main.domain.item.SnsItem;
 import com.snsclicksystem.main.domain.member.Member;
 import com.snsclicksystem.main.domain.member.SignUp;
 import com.snsclicksystem.main.domain.member.dto.MemberInfo;

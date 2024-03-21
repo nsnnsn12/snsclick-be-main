@@ -10,6 +10,8 @@ import lombok.Getter;
 @Getter
 public class Member {
 	
+	private Long id;
+	
 	private String loginId;
 	
 	private String email;
@@ -17,6 +19,10 @@ public class Member {
 	private String password;
 	
 	private MemberType memberType;
+	
+	private Long totalAmount;
+	
+	
 
 	
 }
