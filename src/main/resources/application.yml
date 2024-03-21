@@ -13,14 +13,14 @@ spring:
     console:
       enabled: true
       path: /h2-console
-  flyway:
-    enabled: true
-    baseline-on-migrate: true
+#  flyway:
+#    enabled: true
+#    baseline-on-migrate: true
 
 
-external:
-  real-site:
-    url: test.com
+real-site:
+  url: 'www.test.com'
+  api-key: 'testasdfadsfa'
 
 payment:
   toss:
