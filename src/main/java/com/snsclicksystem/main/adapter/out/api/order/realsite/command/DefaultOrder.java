@@ -4,7 +4,6 @@ import com.snsclicksystem.main.domain.order.dto.OrderedInfoDto;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.RealSiteClient;
 import com.snsclicksystem.main.adapter.out.api.order.realsite.dto.DefaultOrderDto;
 import com.snsclicksystem.main.application.service.order.InternalParameterForOrder;
-import com.snsclicksystem.main.domain.order.exception.NotEnoughConsumerAmountException;
 import com.snsclicksystem.main.domain.transaction_history.TransactionHistory;
 import com.snsclicksystem.main.domain.transaction_history.TransactionType;
 
@@ -28,12 +27,9 @@ public class DefaultOrder extends RealSiteOrder {
         return getOrderedInfo(orderedId);
     }
 
-    //TODO 이 부분도 공통화가 공통화가 가능하면 RealSiteOrder로 옮기는 것이 좋을 듯.
     @Override
-    protected void isMoneyEnough() throws NotEnoughConsumerAmountException {
-        if(parameter.getMember().getTotalAmount() < (long) defaultOrderDto.getQuantity() * parameter.getItem().getPrice()){
-            throw new NotEnoughConsumerAmountException();
-        }
+    protected Long getPrice() {
+        return defaultOrderDto.getQuantity() * parameter.getItem().getPrice();
     }
 
     //TODO 나중에 RealSiteOrder 내의 공통 타입을 한 번 더 묶어 getOrderedInfo, getTransactionHistory 메서드를 RealSiteOrder로 옮기는 것이 좋을 듯.
@@ -53,6 +49,6 @@ public class DefaultOrder extends RealSiteOrder {
         return TransactionHistory.builder()
                 .transactionType(TransactionType.PAYMENT)
                 .memberId(parameter.getMember().getId())
-                .amount(defaultOrderDto.getQuantity() * parameter.getItem().getPrice()).build();
+                .amount(getPrice()).build();
     }
 }
