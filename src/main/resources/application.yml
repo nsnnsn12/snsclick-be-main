@@ -16,7 +16,9 @@ spring:
 #  flyway:
 #    enabled: true
 #    baseline-on-migrate: true
-
+real-site:
+  url: 'www.test.com'
+  api-key: 'testasdfadsfa'
 payment:
   toss:
     test_client_api_key: test_ck_DpexMgkW36N7Z4OJ7Op93GbR5ozO

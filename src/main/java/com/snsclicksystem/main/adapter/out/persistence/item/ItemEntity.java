@@ -11,12 +11,10 @@ public class ItemEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
-    private String itemType;
-    private Integer itemPrice;
-    private Integer itemSolidPrice;
-    private Integer minOrderQuantity;
-    private Integer maxOrderQuantity;
-    private Boolean isRepeatable;
-    private Boolean isCancelable;
-    private Integer averageCompletionTime;
+    @Column(name = "item_name")
+    private String name;
+    @Column(name = "item_content")
+    private String content;
+    @Column(name = "item_price")
+    private Integer price;
 }

@@ -2,13 +2,15 @@ package com.snsclicksystem.main.adapter.out.api.order.realsite.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@SuperBuilder
 public class DefaultOrderDto extends BaseOrderDto{
-    private Long serviceId;
     private String link;
     private Integer quantity;
-    private Integer runs;
-    private Integer interval;
+    private Long orderBeforeQuantity;
+    private Integer runs; //optional
+    private Integer interval; //optional
 }
