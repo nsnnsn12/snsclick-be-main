@@ -1,8 +1,7 @@
-package com.snsclicksystem.main.adapter.out.persistence.member.repository;
+package com.snsclicksystem.main.adapter.out.persistence.member;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
 import com.snsclicksystem.main.domain.member.dto.MemberInfo;
-import com.snsclicksystem.main.domain.member.enums.MemberSex;
 import com.snsclicksystem.main.domain.member.enums.MemberType;
 
 import jakarta.persistence.Column;
@@ -13,8 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,12 +33,7 @@ public class MemberEntity extends BaseTimeEntity{
 	
 	private String email;
 	
-	private Long totAmount; 
-	
-	private Long corpNum;
-	
-	@Enumerated(EnumType.STRING)
-	private MemberSex memberSex;
+	private Long totalAmount; 
 	
 	@Enumerated(EnumType.STRING)
 	private MemberType memberType;
@@ -54,9 +46,7 @@ public class MemberEntity extends BaseTimeEntity{
 		memberEntity.setPassword(memberInfo.getPassword());
 		memberEntity.setEmail(memberInfo.getEmail());
 		memberEntity.setMemberType(memberInfo.getMemberType());
-		memberEntity.setMemberSex(memberInfo.getMemberSex());
-		memberEntity.setCorpNum(memberInfo.getCorpNum());
-		memberEntity.setTotAmount(memberInfo.getTotAmount());
+		memberEntity.setTotalAmount(memberInfo.getTotalAmount());
 		return memberEntity;
 	}
 }

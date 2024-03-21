@@ -48,7 +48,11 @@ public class SecurityConfig {
 				// 토큰을 활욜하면 세션이 필요 없어지므로 STATELESS 로 설정.
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-						registry -> registry.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
+						registry -> registry.requestMatchers("/auth/**", "member/**").permitAll()
+									
+						.anyRequest().authenticated()
+						
+						)
 				
 				// JWT 인증을 위해 직접 구현한 필터를 UsernamePasswordAuthenticationFilter 전에 실행
 				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),

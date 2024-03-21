@@ -1,8 +1,8 @@
 package com.snsclicksystem.main.adapter.out.persistence.transaction_history;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
-import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberJPARepository;
+import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
+import com.snsclicksystem.main.adapter.out.persistence.member.MemberJPARepository;
 import com.snsclicksystem.main.application.port.out.persistence.transaction_history.TransactionHistoryRepository;
 import com.snsclicksystem.main.domain.transaction_history.TransactionHistory;
 import lombok.RequiredArgsConstructor;

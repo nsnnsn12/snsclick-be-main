@@ -1,19 +1,13 @@
-package com.snsclicksystem.main.adapter.out.persistence.member.repository;
-
+package com.snsclicksystem.main.adapter.out.persistence.member;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.snsclicksystem.main.adapter.out.persistence.charge.ChargeEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
-import com.snsclicksystem.main.domain.charge.dto.ChargedInfo;
 import com.snsclicksystem.main.domain.member.Member;
-import com.snsclicksystem.main.domain.member.SignUp;
 import com.snsclicksystem.main.domain.member.dto.MemberInfo;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Repository

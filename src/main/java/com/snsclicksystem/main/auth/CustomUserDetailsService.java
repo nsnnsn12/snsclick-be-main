@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
+import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.member.Member;
 

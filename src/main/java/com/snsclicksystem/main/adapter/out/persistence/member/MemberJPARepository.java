@@ -1,4 +1,4 @@
-package com.snsclicksystem.main.adapter.out.persistence.member.repository;
+package com.snsclicksystem.main.adapter.out.persistence.member;
 
 import java.util.Optional;
 

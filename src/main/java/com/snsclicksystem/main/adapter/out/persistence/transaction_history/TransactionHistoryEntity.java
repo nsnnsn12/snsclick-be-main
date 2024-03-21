@@ -1,7 +1,7 @@
 package com.snsclicksystem.main.adapter.out.persistence.transaction_history;
 
 import com.snsclicksystem.main.adapter.out.persistence.common.BaseTimeEntity;
-import com.snsclicksystem.main.adapter.out.persistence.member.repository.MemberEntity;
+import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.domain.transaction_history.TransactionType;
 import jakarta.persistence.*;
 import lombok.Builder;
