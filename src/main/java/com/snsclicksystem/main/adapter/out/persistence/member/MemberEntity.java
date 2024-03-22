@@ -21,8 +21,8 @@ import lombok.NoArgsConstructor;
 public class MemberEntity extends BaseTimeEntity{
 	
 	@Builder
-	private MemberEntity(String loginId, String password, String email, Long totalAmount, MemberType memberType) {
-		this.loginId = loginId;
+	private MemberEntity(String username, String password, String email, Long totalAmount, MemberType memberType) {
+		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.totalAmount = totalAmount;
@@ -34,7 +34,7 @@ public class MemberEntity extends BaseTimeEntity{
 	@Column(name = "member_id")
 	private Long id;
 	
-	private String loginId;
+	private String username;
 	
 	private String password;
 	

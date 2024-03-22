@@ -12,7 +12,7 @@ public class Member {
 	
 	private Long id;
 	
-	private String loginId;
+	private String username;
 	
 	private String email;
 	

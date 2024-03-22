@@ -11,7 +11,7 @@ import lombok.Setter;
 public class RequestSignUp {
 	
 	@NotNull
-	private String loginId;
+	private String username;
 	
 	@NotNull
 	private String password;

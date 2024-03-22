@@ -22,14 +22,14 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 	
 	@Override
-	public Optional<Member> findByLoginId(String LoginId) {
-		Optional<MemberEntity> member = jpaRepository.findByLoginId(LoginId);
+	public Optional<Member> findByUsername(String username) {
+		Optional<MemberEntity> member = jpaRepository.findByUsername(username);
 		return member.map(this::getMemberFromModel);
 	}
 
 	@Override
-	public boolean existsByLoginId(String LoginId) {
-		return jpaRepository.existsByLoginId(LoginId);
+	public boolean existsByUsername(String username) {
+		return jpaRepository.existsByUsername(username);
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	
 	private MemberEntity fromMember(Member member){
 		return MemberEntity.builder()
-					.loginId(member.getLoginId())
+					.username(member.getUsername())
 					.password(member.getPassword())
 					.email(member.getEmail())
 					.memberType(member.getMemberType())
@@ -49,7 +49,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	
 	 private Member getMemberFromModel(MemberEntity entity){
 	        return Member.builder()
-	        			.loginId(entity.getLoginId())
+	        			.username(entity.getUsername())
 	        			.email(entity.getEmail())
 	        			.password(entity.getPassword())
 	        			.memberType(entity.getMemberType())

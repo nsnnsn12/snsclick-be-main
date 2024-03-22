@@ -22,15 +22,15 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-		return memberRepository.findByLoginId(loginId)
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return memberRepository.findByUsername(username)
 				.map(this::createUserDetails)
-				.orElseThrow(() ->new UsernameNotFoundException(loginId + "을 DB에서 찾을 수 없음"));
+				.orElseThrow(() ->new UsernameNotFoundException(username + "을 DB에서 찾을 수 없음"));
 	}
 	
 	private UserDetails createUserDetails(Member member) {
 		return User.builder()
-				.username(member.getLoginId())
+				.username(member.getUsername())
 				.password(member.getPassword())
 				.roles(member.getMemberType().toString())
 				.build();

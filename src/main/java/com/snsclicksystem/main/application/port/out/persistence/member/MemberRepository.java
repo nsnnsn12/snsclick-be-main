@@ -10,11 +10,14 @@ public interface MemberRepository {
 
 	public Member save(Member member);
 	
-	public Optional<Member> findByLoginId(String LoginId);
+	public Optional<Member> findByUsername(String username);
 	
-	public boolean existsByLoginId(String LoginId);
+	public boolean existsByUsername(String username);
 
 	public boolean existsByEmail(String email);
+
+	
+
 
 	
 

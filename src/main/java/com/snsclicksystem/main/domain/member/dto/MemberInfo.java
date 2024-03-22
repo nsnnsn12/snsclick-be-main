@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 public class MemberInfo {
 
-	private String loginId;
+	private String username;
 	
 	private String password;
 	

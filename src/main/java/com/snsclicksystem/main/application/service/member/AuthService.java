@@ -22,11 +22,11 @@ public class AuthService implements AuthUseCase{
 	private final JwtAuthentication jwtAuthentication;
     
 	@Override
-	public ResponseToken signIn(String loginId, String password) throws MemberNotFoundException {
-		if(!memberRepository.existsByLoginId(loginId)) {
+	public ResponseToken signIn(String username, String password) throws MemberNotFoundException {
+		if(!memberRepository.existsByUsername(username)) {
 			throw new MemberNotFoundException();
 		}
 		
-		return jwtAuthentication.execute(loginId, password);
+		return jwtAuthentication.execute(username, password);
 	}
 }

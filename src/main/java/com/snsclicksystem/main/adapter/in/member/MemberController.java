@@ -38,7 +38,7 @@ public class MemberController {
     
     private MemberInfo getMemberInfo (RequestSignUp request) {
     	return MemberInfo.builder()
-    					 .loginId(request.getLoginId()) 
+    					 .username(request.getUsername()) 
     					 .password(request.getPassword())
     					 .email(request.getEmail())
     					 .build();

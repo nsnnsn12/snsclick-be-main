@@ -27,7 +27,7 @@ public class MemberService implements MemberUseCase {
 	@Override
 	public Member createMember(MemberInfo memberInfo) throws DuplicateMemberInfoException {
 		isDuplicateEmail(memberInfo.getEmail());
-		isDuplicateLoginId(memberInfo.getLoginId());
+		isDuplicateUsername(memberInfo.getUsername());
 		
 		Member member = getMember(memberInfo);
 		
@@ -38,7 +38,7 @@ public class MemberService implements MemberUseCase {
 		String password = encoder.encode(memberInfo.getPassword());
 		
 		return Member.builder()
-						 .loginId(memberInfo.getLoginId())
+						 .username(memberInfo.getUsername())
 						 .password(password)
 						 .totalAmount(0L)
 						 .memberType(MemberType.NORMAL)
@@ -53,9 +53,9 @@ public class MemberService implements MemberUseCase {
 		
 	}
 
-	private void isDuplicateLoginId(String loginId) throws DuplicateMemberInfoException {
-		if(memberRepository.existsByLoginId(loginId)) {
-			throw new DuplicateMemberInfoException(MemberExceptionMessage.DUPLICATE_MEMBER_LOGIN_ID.getMessage());
+	private void isDuplicateUsername(String username) throws DuplicateMemberInfoException {
+		if(memberRepository.existsByUsername(username)) {
+			throw new DuplicateMemberInfoException(MemberExceptionMessage.DUPLICATE_MEMBER_USERNAME.getMessage());
 		}
 	}
 
