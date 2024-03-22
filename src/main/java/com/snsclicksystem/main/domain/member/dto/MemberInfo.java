@@ -7,6 +7,10 @@ import lombok.Getter;
 
 @Getter
 @Builder
+
+/*
+ * 회원가입 시, 회원 가입 정보가 들어오는 DTO
+ */
 public class MemberInfo {
 
 	private String loginId;
@@ -14,9 +18,4 @@ public class MemberInfo {
 	private String password;
 	
 	private String email;
-
-	private MemberType memberType;
-	
-	
-	private Long totalAmount;
 }

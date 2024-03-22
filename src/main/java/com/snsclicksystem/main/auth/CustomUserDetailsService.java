@@ -27,12 +27,12 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return memberRepository.findEntityByLoginId(username)
+		return memberRepository.findByLoginId(username)
 				.map(this::createUserDetails)
 				.orElseThrow(() ->new UsernameNotFoundException(username + "을 DB에서 찾을 수 없음"));
 	}
 	
-	private UserDetails createUserDetails(MemberEntity member) {
+	private UserDetails createUserDetails(Member member) {
 		return User.builder()
 				.username(member.getLoginId())
 				.password(member.getPassword())

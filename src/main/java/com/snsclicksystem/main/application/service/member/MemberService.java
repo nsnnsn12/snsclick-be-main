@@ -26,24 +26,24 @@ public class MemberService implements MemberUseCase {
 	private final PasswordEncoder encoder;
 
 	@Override
-	public Member createMember(RequestSignUp request) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
-		isDuplicateEmail(request.getEmail());
-		isDuplicateLoginId(request.getLoginId());
+	public Member createMember(MemberInfo memberInfo) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
+		isDuplicateEmail(memberInfo.getEmail());
+		isDuplicateLoginId(memberInfo.getLoginId());
 		
-		MemberInfo memberInfo = getMemberInfo(request);
+		Member member = getMember(memberInfo);
 		
-		return memberRepository.save(memberInfo);
+		return memberRepository.save(member);
 	}
 	
-	private MemberInfo getMemberInfo(RequestSignUp request) {
-		String password = encoder.encode(request.getPassword());
+	private Member getMember(MemberInfo memberInfo) {
+		String password = encoder.encode(memberInfo.getPassword());
 		
-		return MemberInfo.builder()
-						 .loginId(request.getLoginId())
+		return Member.builder()
+						 .loginId(memberInfo.getLoginId())
 						 .password(password)
 						 .totalAmount(0L)
 						 .memberType(MemberType.NORMAL)
-						 .email(request.getEmail())
+						 .email(memberInfo.getEmail())
 						 .build();
 	}
 

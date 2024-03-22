@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.member.Member;
-import com.snsclicksystem.main.domain.member.dto.MemberInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,37 +16,15 @@ public class MemberRepositoryImpl implements MemberRepository {
 	private final MemberJPARepository jpaRepository;
 	
 	@Override
-	public int findTotAmountById(Long memberId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Optional<Member> findById(Long id) {
-		Optional<MemberEntity> member = jpaRepository.findById(id);
-		return member.map(this::getMemberFromModel);
-	}
-	
-	@Override
-	public Optional<MemberEntity> findEntityByLoginId(String LoginId) {
-		return jpaRepository.findEntityByLoginId(LoginId);
+	public Member save(Member member) {
+		MemberEntity entity = jpaRepository.save(fromMember(member));
+		return (getMemberFromModel(entity));
 	}
 	
 	@Override
 	public Optional<Member> findByLoginId(String LoginId) {
 		Optional<MemberEntity> member = jpaRepository.findByLoginId(LoginId);
 		return member.map(this::getMemberFromModel);
-	}
-	
-	@Override
-	public Optional<MemberEntity> findEntityById(Long id) {
-		return jpaRepository.findById(id);
-	}
-
-
-	@Override
-	public void save(MemberEntity memberEntity) {
-		jpaRepository.save(memberEntity);
 	}
 
 	@Override
@@ -59,24 +36,16 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public boolean existsByEmail(String email) {
 		return jpaRepository.existsByEmail(email);
 	}
-
-	@Override
-	public Member save(MemberInfo memberInfo) {
-		MemberEntity entity = jpaRepository.save(MemberEntity.createMemberEntity(memberInfo));
-		return (getMemberFromModel(entity));
-	}
 	
-//	private MemberEntity fromMemberInfo(MemberInfo memberInfo){
-//		return MemberEntity.builder()
-//					.loginId(memberInfo.getLoginId())
-//					.password(memberInfo.getPassword())
-//					.email(memberInfo.getEmail())
-//					.memberType(memberInfo.getMemberType())
-//					.memberSex(memberInfo.getMemberSex())
-//					.corpNum(memberInfo.getCorpNum())
-//					.totAmount(memberInfo.getTotAmount())
-//					.build();
-//	}
+	private MemberEntity fromMember(Member member){
+		return MemberEntity.builder()
+					.loginId(member.getLoginId())
+					.password(member.getPassword())
+					.email(member.getEmail())
+					.memberType(member.getMemberType())
+					.totalAmount(member.getTotalAmount())
+					.build();
+	}
 	
 	 private Member getMemberFromModel(MemberEntity entity){
 	        return Member.builder()
@@ -84,8 +53,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	        			.email(entity.getEmail())
 	        			.password(entity.getPassword())
 	        			.memberType(entity.getMemberType())
+	        			.totalAmount(entity.getTotalAmount())
 	        			.build();
 	  }
-	
 
 }
