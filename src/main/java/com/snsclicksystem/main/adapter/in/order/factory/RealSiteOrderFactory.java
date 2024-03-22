@@ -41,8 +41,8 @@ public class RealSiteOrderFactory implements OrderFactory {
         DefaultOrderDto defaultOrderDto = (DefaultOrderDto) baseOrderDto;
         defaultOrderDto.setLink(order.getLink());
         defaultOrderDto.setQuantity(order.getQuantity());
-        defaultOrderDto.setRuns(order.getRuns());
-        defaultOrderDto.setInterval(order.getInterval());
+        defaultOrderDto.setRuns(order.getRuns()); //optional
+        defaultOrderDto.setInterval(order.getInterval()); //optional
         return new DefaultOrder(realSiteClient, parameter, defaultOrderDto);
     }
 }

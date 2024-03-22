@@ -9,6 +9,6 @@ public class RequestOrder {
 	private String link;
 	private Integer quantity;
 	private Long itemId;
-	private Integer runs; //optional
-	private Integer interval; //optional
+	private Integer runs;
+	private Integer interval;
 }
