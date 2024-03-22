@@ -37,28 +37,32 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf(AbstractHttpConfigurer::disable)
-
+	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.csrf(AbstractHttpConfigurer::disable)
+				
 				.exceptionHandling((handling) -> handling.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 						.accessDeniedHandler(jwtAccessDeniedHandler))
-
+				
 				.headers((header) -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-
+				
 				// 토큰을 활욜하면 세션이 필요 없어지므로 STATELESS 로 설정.
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				
 				.authorizeHttpRequests(
 						registry -> registry.requestMatchers("/auth/**", "member/**").permitAll()
-									
 						.anyRequest().authenticated()
-						
 						)
+				
+				// spring security default 파라미터 값 username 변경
+				.formLogin(
+						formLogin ->formLogin.usernameParameter("loginId") 
+						)		
 				
 				// JWT 인증을 위해 직접 구현한 필터를 UsernamePasswordAuthenticationFilter 전에 실행
 				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
 						UsernamePasswordAuthenticationFilter.class)
 				;
 
-		return http.build();
+		return httpSecurity.build();
 	}
 }

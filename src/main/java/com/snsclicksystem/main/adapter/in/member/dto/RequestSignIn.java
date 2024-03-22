@@ -11,7 +11,7 @@ import lombok.ToString;
 public class RequestSignIn {
 
 	@NotNull
-	private String username;
+	private String loginId;
 	
 	@NotNull
 	private String password;

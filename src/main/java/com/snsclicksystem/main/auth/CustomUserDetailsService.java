@@ -1,16 +1,12 @@
 package com.snsclicksystem.main.auth;
 
-import java.util.Optional;
-
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.member.Member;
 
@@ -26,10 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return memberRepository.findByLoginId(username)
+	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+		return memberRepository.findByLoginId(loginId)
 				.map(this::createUserDetails)
-				.orElseThrow(() ->new UsernameNotFoundException(username + "을 DB에서 찾을 수 없음"));
+				.orElseThrow(() ->new UsernameNotFoundException(loginId + "을 DB에서 찾을 수 없음"));
 	}
 	
 	private UserDetails createUserDetails(Member member) {

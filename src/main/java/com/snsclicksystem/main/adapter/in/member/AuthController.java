@@ -30,7 +30,7 @@ public class AuthController {
     @PostMapping("/signIn")
     public ResponseEntity<ResponseSignIn> signIn(@Valid @RequestBody RequestSignIn request) throws MemberNotFoundException {
         try {
-			return new ResponseEntity<>(objectMapper.convert(authUseCase.signIn(request.getUsername(),request.getPassword()), ResponseSignIn.class),
+			return new ResponseEntity<>(objectMapper.convert(authUseCase.signIn(request.getLoginId(),request.getPassword()), ResponseSignIn.class),
 					HttpStatus.OK);
 		} catch (MemberNotFoundException e) {
 			throw new NoSearchException(e.getMessage());
