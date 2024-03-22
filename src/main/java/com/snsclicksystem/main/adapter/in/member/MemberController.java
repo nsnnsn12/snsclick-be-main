@@ -12,8 +12,7 @@ import com.snsclicksystem.main.adapter.in.member.dto.RequestSignUp;
 import com.snsclicksystem.main.adapter.in.member.dto.ResponseSignUp;
 import com.snsclicksystem.main.application.port.in.member.MemberUseCase;
 import com.snsclicksystem.main.domain.member.dto.MemberInfo;
-import com.snsclicksystem.main.domain.member.exception.DuplicateMemberEmailException;
-import com.snsclicksystem.main.domain.member.exception.DuplicateMemberLoginIdException;
+import com.snsclicksystem.main.domain.member.exception.DuplicateMemberInfoException;
 import com.snsclicksystem.main.util.modelmapper.ObjectMapper;
 
 import jakarta.validation.Valid;
@@ -28,10 +27,10 @@ public class MemberController {
     private final ObjectMapper objectMapper;
 	
     @PostMapping("/signUp")
-    public ResponseEntity<ResponseSignUp> signUp(@Valid @RequestBody RequestSignUp request) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
+    public ResponseEntity<ResponseSignUp> signUp(@Valid @RequestBody RequestSignUp request) throws DuplicateMemberInfoException {
 		try {
 			return new ResponseEntity<>(objectMapper.convert(memberUseCase.createMember(getMemberInfo(request)), ResponseSignUp.class), HttpStatus.OK);
-		} catch(DuplicateMemberEmailException | DuplicateMemberLoginIdException e) {
+		} catch(DuplicateMemberInfoException e) {
 			throw new NoCreateException(e.getMessage());
 		}
     	

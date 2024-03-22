@@ -4,14 +4,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.snsclicksystem.main.adapter.in.member.dto.RequestSignUp;
 import com.snsclicksystem.main.application.port.in.member.MemberUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
 import com.snsclicksystem.main.domain.member.Member;
 import com.snsclicksystem.main.domain.member.dto.MemberInfo;
 import com.snsclicksystem.main.domain.member.enums.MemberType;
-import com.snsclicksystem.main.domain.member.exception.DuplicateMemberEmailException;
-import com.snsclicksystem.main.domain.member.exception.DuplicateMemberLoginIdException;
+import com.snsclicksystem.main.domain.member.exception.DuplicateMemberInfoException;
+import com.snsclicksystem.main.domain.member.exception.MemberExceptionMessage;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,7 @@ public class MemberService implements MemberUseCase {
 	private final PasswordEncoder encoder;
 
 	@Override
-	public Member createMember(MemberInfo memberInfo) throws DuplicateMemberEmailException, DuplicateMemberLoginIdException {
+	public Member createMember(MemberInfo memberInfo) throws DuplicateMemberInfoException {
 		isDuplicateEmail(memberInfo.getEmail());
 		isDuplicateLoginId(memberInfo.getLoginId());
 		
@@ -47,16 +46,16 @@ public class MemberService implements MemberUseCase {
 						 .build();
 	}
 
-	private void isDuplicateEmail(String email) throws DuplicateMemberEmailException {
+	private void isDuplicateEmail(String email) throws DuplicateMemberInfoException {
 		if(memberRepository.existsByEmail(email)) {
-			throw new DuplicateMemberEmailException();
+			throw new DuplicateMemberInfoException(MemberExceptionMessage.DUPLICATE_MEMBER_EMAIL.getMessage());
 		}
 		
 	}
 
-	private void isDuplicateLoginId(String loginId) throws DuplicateMemberLoginIdException {
+	private void isDuplicateLoginId(String loginId) throws DuplicateMemberInfoException {
 		if(memberRepository.existsByLoginId(loginId)) {
-			throw new DuplicateMemberLoginIdException();
+			throw new DuplicateMemberInfoException(MemberExceptionMessage.DUPLICATE_MEMBER_LOGIN_ID.getMessage());
 		}
 	}
 
