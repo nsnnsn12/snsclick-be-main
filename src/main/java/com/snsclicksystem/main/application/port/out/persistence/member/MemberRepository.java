@@ -3,19 +3,26 @@ package com.snsclicksystem.main.application.port.out.persistence.member;
 
 import java.util.Optional;
 
-import com.snsclicksystem.main.adapter.out.persistence.member.MemberEntity;
 import com.snsclicksystem.main.domain.member.Member;
 
-import lombok.NonNull;
 
 public interface MemberRepository {
 
-	public int findTotAmountById(Long id);
+	public Member save(Member member);
+	
+	public Optional<Member> findByUsername(String username);
+	
+	public boolean existsByUsername(String username);
 
-	public Optional<Member> findById(Long id);
+	public boolean existsByEmail(String email);
 
-	public Optional<MemberEntity> findEntityById(Long id);
+	
 
-	public void save(MemberEntity memberEntity);
+
+	
+
+	
+
+	
 
 }

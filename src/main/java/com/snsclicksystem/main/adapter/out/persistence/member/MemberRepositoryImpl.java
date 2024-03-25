@@ -1,6 +1,5 @@
 package com.snsclicksystem.main.adapter.out.persistence.member;
 
-
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -16,33 +15,46 @@ public class MemberRepositoryImpl implements MemberRepository {
 	
 	private final MemberJPARepository jpaRepository;
 	
+	@Override
+	public Member save(Member member) {
+		MemberEntity entity = jpaRepository.save(fromMember(member));
+		return (getMemberFromModel(entity));
+	}
 	
 	@Override
-	public int findTotAmountById(Long memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Optional<Member> findByUsername(String username) {
+		Optional<MemberEntity> member = jpaRepository.findByUsername(username);
+		return member.map(this::getMemberFromModel);
 	}
 
 	@Override
-	public Optional<Member> findById(Long id) {
-		Optional<MemberEntity> member = jpaRepository.findById(id);
-		return member.map(this::getMemberFromModel);
+	public boolean existsByUsername(String username) {
+		return jpaRepository.existsByUsername(username);
 	}
 	
 	@Override
-	public Optional<MemberEntity> findEntityById(Long id) {
-		return jpaRepository.findById(id);
+	public boolean existsByEmail(String email) {
+		return jpaRepository.existsByEmail(email);
+	}
+	
+	private MemberEntity fromMember(Member member){
+		return MemberEntity.builder()
+					.username(member.getUsername())
+					.password(member.getPassword())
+					.email(member.getEmail())
+					.memberType(member.getMemberType())
+					.totalAmount(member.getTotalAmount())
+					.build();
 	}
 	
 	 private Member getMemberFromModel(MemberEntity entity){
-	        return Member.builder().email(entity.getEmail()).build();
-	    }
-
-	@Override
-	public void save(MemberEntity memberEntity) {
-		jpaRepository.save(memberEntity);
-	}
-
-
+	        return Member.builder()
+	        			.username(entity.getUsername())
+	        			.email(entity.getEmail())
+	        			.password(entity.getPassword())
+	        			.memberType(entity.getMemberType())
+	        			.totalAmount(entity.getTotalAmount())
+	        			.build();
+	  }
 
 }

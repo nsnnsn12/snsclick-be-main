@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.snsclicksystem.main.adapter.in.charge.dto.RequestCharge;
 import com.snsclicksystem.main.adapter.in.charge.dto.ResponseCharge;
@@ -21,11 +22,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-//@RestController
-//@RequestMapping("/charge")
-@RequiredArgsConstructor
-@Controller
 @Slf4j
+@RestController
+@RequestMapping("/charge")
+@RequiredArgsConstructor
 public class ChargeController {
 
 	private final ChargeUseCase chargeUseCase;
@@ -42,13 +42,15 @@ public class ChargeController {
 	@PostMapping("/requestCharge")
 	@ResponseBody
 	public ResponseEntity<ResponseCharge> requestTossPayment(@RequestBody @Valid RequestCharge charge) {
-		try {
-			ChargedInfo chargedInfo = chargeUseCase.requestCharge(new TossPaymentChargeFactory(charge));
-			ResponseCharge responseCharge = new ResponseCharge(chargedInfo);
-			return new ResponseEntity<>(responseCharge, HttpStatus.OK);
-		} catch (ChargeRequestFailException e) {
-            throw new NoCreateException(e.getMessage());
-		}
+//		try {
+//			ChargedInfo chargedInfo = chargeUseCase.requestCharge(new TossPaymentChargeFactory(charge));
+//			ResponseCharge responseCharge = new ResponseCharge(chargedInfo);
+//			return new ResponseEntity<>(responseCharge, HttpStatus.OK);
+//		} catch (ChargeRequestFailException e) {
+//            throw new NoCreateException(e.getMessage());
+//		}
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	/*
