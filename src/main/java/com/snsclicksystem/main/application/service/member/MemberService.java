@@ -26,6 +26,7 @@ public class MemberService implements MemberUseCase {
 
 	@Override
 	public Member createMember(MemberInfo memberInfo) throws DuplicateMemberInfoException {
+		//TODO: username, password, email validation rule definition
 		isDuplicateEmail(memberInfo.getEmail());
 		isDuplicateUsername(memberInfo.getUsername());
 		
