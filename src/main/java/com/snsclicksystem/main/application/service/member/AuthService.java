@@ -2,6 +2,7 @@ package com.snsclicksystem.main.application.service.member;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.snsclicksystem.main.application.port.in.member.AuthUseCase;
 import com.snsclicksystem.main.application.port.out.persistence.member.MemberRepository;
@@ -29,4 +30,5 @@ public class AuthService implements AuthUseCase{
 		
 		return jwtAuthentication.execute(username, password);
 	}
+	
 }
